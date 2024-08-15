@@ -1,0 +1,61 @@
+/* src/components/Research.css */
+.research-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f5f0e8;
+  }
+  
+  h1 {
+    color: #333;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+  
+  .intro {
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  .research-item {
+    background-color: white;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .research-item h2 {
+    color: #444;
+    margin-top: 0;
+  }
+  
+  .research-item p {
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .icons {
+    margin: 10px 0;
+  }
+  
+  .icons span {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  /* Existing styles */
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }

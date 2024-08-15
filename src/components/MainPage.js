@@ -1,23 +1,13 @@
 // src/components/MainPage.js
 import React from 'react';
 import '../App.css';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import profileImage from '../assets/images/mimi.jpg';
+import Portfolio from './Portfolio';
+
 
 const MainPage = () => {
   return (
     <div className="main-container">
-      <header className="header">
-        <h1>Fiona Zhang <span className="title">/ ML Engineer</span></h1>
-        <nav className="nav-links">
-          <Link to="/">Main</Link>
-          <Link to="/portfolios">Portfolio</Link>
-          <Link to="/research">Research</Link>
-          <Link to="/experiences">Experiences</Link>
-          <Link to="/skills">Skills</Link>
-          <Link to="/contact">Get in touch</Link>
-        </nav>
-      </header>
       <div className="content">
         <div className="profile-card">
           <img src={profileImage} alt="Fiona Zhang" className="profile-image" />
@@ -29,13 +19,6 @@ const MainPage = () => {
           </div>
         </div>
         <div className="introduction">
-          <h2>Open for part-time roles</h2>
-          <div className="buttons">
-            <button>Portfolio</button>
-            <button>Research</button>
-            <button>Experiences</button>
-            <button>Skills</button>
-          </div>
           <p>
             Hi! I am Fiona, a recent graduate from BSc-Computing and Software System student at The University of Melbourne. I am currently working full-time as a Machine Learning Engineer.
           </p>
@@ -47,6 +30,7 @@ const MainPage = () => {
           </p>
         </div>
       </div>
+      <Portfolio />
     </div>
   );
 };

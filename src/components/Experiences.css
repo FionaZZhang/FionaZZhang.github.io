@@ -1,0 +1,60 @@
+
+/* Experience page */
+
+.experiences-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .experiences-container h2 {
+    font-size: 24px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 30px;
+  }
+  
+  .experience-item, .education-item {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .experience-item h3, .education-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin-top: 0;
+  }
+  
+  .experience-item p, .education-item p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .experience-item ul, .education-item ul {
+    padding-left: 20px;
+  }
+  
+  .experience-item li, .education-item li {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the "looking for roles" message */
+  .experiences-container > p {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .experiences-container {
+      padding: 10px;
+    }
+  
+    .experience-item, .education-item {
+      padding: 15px;
+    }
+  }
