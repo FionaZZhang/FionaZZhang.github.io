@@ -1,60 +1,84 @@
-
-/* Experience page */
-
+/* src/components/Experience.css */
 .experiences-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.experiences-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.experiences-container h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.experience-item, .education-item {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.experience-item:hover, .education-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.experience-item h3, .education-item h3 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.experience-item p, .education-item p {
+  margin: 0.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.experience-item ul, .education-item ul {
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+.experience-item li, .education-item li {
+  margin-bottom: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* Style for the "looking for roles" message */
+.experiences-container > p {
+  font-style: italic;
+  color: #666;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .experiences-container {
+    padding: 1rem;
   }
-  
-  .experiences-container h2 {
-    font-size: 24px;
-    color: #333;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    margin-top: 30px;
-  }
-  
+
   .experience-item, .education-item {
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 1.5rem;
   }
-  
-  .experience-item h3, .education-item h3 {
-    font-size: 20px;
-    color: #333;
-    margin-top: 0;
-  }
-  
-  .experience-item p, .education-item p {
-    margin: 5px 0;
-    color: #666;
-  }
-  
-  .experience-item ul, .education-item ul {
-    padding-left: 20px;
-  }
-  
-  .experience-item li, .education-item li {
-    margin-bottom: 10px;
-  }
-  
-  /* Style for the "looking for roles" message */
-  .experiences-container > p {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  /* Responsive design for smaller screens */
-  @media (max-width: 768px) {
-    .experiences-container {
-      padding: 10px;
-    }
-  
-    .experience-item, .education-item {
-      padding: 15px;
-    }
-  }
+}

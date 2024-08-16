@@ -14,8 +14,7 @@ const ProjectCard = ({ title, description, imageUrl, videoUrl, links }) => (
     {videoUrl && (
       <div className="project-video-container">
         <video controls className="project-video">
-          <source src={videoUrl} type="video/quicktime" />
-          <source src={videoUrl.replace('.mov', '.mp4')} type="video/mp4" />
+          <source src={videoUrl} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
@@ -50,6 +49,15 @@ const Portfolio = () => {
       ]
     },
     {
+      title: "🐳 Finding NEMO!",
+      description: "Virtual Reality Gameplay developed to investigate multimodal feedback.",
+      videoUrl: FindingNemo,
+      links: [
+        { text: "Project & Paper", url: "https://www.vr-ku.dk/education/vr-course/selected-projects/finding-nemo-in-vr" },
+        { text: "Github", url: "https://github.com/FionaZZhang/VR_Object_Tracking" }
+      ]
+    },
+    {
       title: "🏎️ Doomsday Mercedes",
       description: "This surreal animation portraits a 🪐 magical reality that carries my vision of the future...",
       videoUrl: Mercedes,
@@ -66,20 +74,11 @@ const Portfolio = () => {
         { text: "Site [with big AI model]", url: "https://deeplearnmuse-3t5mgrwzwa-km.a.run.app" }
       ]
     },
-    {
-      title: "🐳 Finding NEMO!",
-      description: "Virtual Reality Gameplay developed to investigate multimodal feedback.",
-      videoUrl: FindingNemo,
-      links: [
-        { text: "Project & Paper", url: "https://www.vr-ku.dk/education/vr-course/selected-projects/finding-nemo-in-vr" },
-        { text: "Github", url: "https://github.com/FionaZZhang/VR_Object_Tracking" }
-      ]
-    },
   ];
 
   return (
     <div className="portfolio-container">
-      <h1 className="portfolio-title">Portfolio</h1>
+      <h1 className="portfolio-title">Some of my work</h1>
       <div className="projects-grid">
         {projects.map((project, index) => (
           <ProjectCard key={index} {...project} />
