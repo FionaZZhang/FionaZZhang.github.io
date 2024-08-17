@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../App.css';
 import './Portfolio.css';
 import profileImage from '../assets/images/mimi.jpg';
 import Portfolio from './Portfolio';
 
 const MainPage = () => {
+  useEffect(() => {
+    const createStars = () => {
+      const stars = document.querySelector('.stars');
+      const numStars = 200;
+
+      for (let i = 0; i < numStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.width = `${Math.random() * 2}px`;
+        star.style.height = star.style.width;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 5}s`;
+        stars.appendChild(star);
+      }
+    };
+
+    createStars();
+  }, []);
+
   return (
-    <div className="main-container">
+    <>
+      <div className="stars"></div>
       <div className="content">
         <div className="profile-card">
           <img src={profileImage} alt="Fiona Zhang" className="profile-image" />
@@ -18,13 +39,15 @@ const MainPage = () => {
           </div>
         </div>
         <div className="introduction-and-contact">
-          <div className="introduction">
-            <p>
-              Hi! I am Fiona, a recent graduate from BSc-Computing and Software System student at The University of Melbourne. I am currently working full-time as a Machine Learning Engineer.
-            </p>
-            <p>
-              I have been developing my skills through various research and hands-on projects. I can code in advanced level using Python, C, C#, and Java; I have two years of experiences in ML and AI and am also experienced with Computer Vision, VR development, game development (Unity), 3D modelling (Blender), and web development (VUE, Flask). Still exploring!
-            </p>
+          <div className="introduction-container">
+            <div className="introduction">
+              <p>
+                Hi! I am Fiona, a recent graduate from BSc-Computing and Software System student at The University of Melbourne. I am currently working full-time as a Machine Learning Engineer.
+              </p>
+              <p>
+                I have been developing my skills through various research and hands-on projects. I can code in advanced level using Python, C, C#, and Java; I have two years of experiences in ML and AI and am also experienced with Computer Vision, VR development, game development (Unity), 3D modelling (Blender), and web development (VUE, Flask). Still exploring!
+              </p>
+            </div>
           </div>
           <div className="contact-info">
             <div className="contact-item">
@@ -45,7 +68,7 @@ const MainPage = () => {
         </div>
       </div>
       <Portfolio />
-    </div>
+    </>
   );
 };
 

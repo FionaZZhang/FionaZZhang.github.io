@@ -1,0 +1,59 @@
+/* src/components/Skills.css */
+.skills-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif;
+    color: #e0e0e0;
+    background-color: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.1);
+  }
+  
+  .skills-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+  
+  .skill-item {
+    background-color: rgba(30, 30, 30, 0.8);
+    margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+  }
+  
+  .skill-item h2 {
+    color: #00ffff;
+    margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  }
+  
+  .skill-description {
+    color: #b0b0b0;
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .skills-container {
+      padding: 1rem;
+    }
+  
+    .skill-item {
+      padding: 1.5rem;
+    }
+  }

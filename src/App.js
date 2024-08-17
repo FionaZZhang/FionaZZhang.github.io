@@ -6,6 +6,7 @@ import Header from './components/Header';
 import MainPage from './components/MainPage';
 import Portfolios from './components/Portfolio';
 import Research from './components/Research';
+import Skills from './components/Skills';
 import Experiences from './components/Experiences';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/portfolios" element={<Portfolios />} />
-          <Route path="/research" element={<Research />} />
+          <Route path="/skills" element={<Skills />} />
           <Route path="/experiences" element={<Experiences />} />
         </Routes>
       </div>
