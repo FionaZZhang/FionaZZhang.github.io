@@ -201,7 +201,7 @@ const Portfolio = () => {
                         It brings my research to life by implementing a real music recommender system. 
                         A trained deep learning model is used to classify the user's audio into a specific genre, 
                         and a genre vector is employed to find and recommend the most similar music from a public 
-                        database.`
+                        database. (sound on! 🔊)`
     },
     {
       coverImage: NemoCover,
