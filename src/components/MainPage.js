@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../App.css';
 import './Portfolio.css';
-import profileImage from '../assets/images/mimi.jpg';
+import profileImage from '../assets/images/favicon.png';
 import Portfolio from './Portfolio';
 
 const MainPage = () => {
@@ -41,12 +41,15 @@ const MainPage = () => {
         <div className="introduction-and-contact">
           <div className="introduction-container">
             <div className="introduction">
-              <p>
-                Hi! I am Fiona, a recent graduate from BSc-Computing and Software System student at The University of Melbourne. I am currently working full-time as a Machine Learning Engineer.
-              </p>
-              <p>
-                I have been developing my skills through various research and hands-on projects. I can code in advanced level using Python, C, C#, and Java; I have two years of experiences in ML and AI and am also experienced with Computer Vision, VR development, game development (Unity), 3D modelling (Blender), and web development (VUE, Flask). Still exploring!
-              </p>
+            <p>
+              Welcome! I am Fiona, a recent BSc in Computing and Software System graduate from The University of Melbourne 👩🏼‍💻. I'm currently working as a Graduate Machine Learning Engineer in the game industry 🕹️.
+            </p>
+            <p>
+              Academically, I am fascinated by natural language processing (NLP) 🧠 and computer vision (CV) 👁️, especially their intersection and how they can push the boundaries of both fields. 
+            </p>
+            <p>
+              Practically, I delve into how NLP and CV can collaborate to drive innovation 🚀. My interest also extends to algorithms and how they can be applied in software engineering 🔍. My goal is to democratize machine learning solutions and maximize their potential in real-world applications 🌟!
+            </p>
             </div>
           </div>
           <div className="contact-info">

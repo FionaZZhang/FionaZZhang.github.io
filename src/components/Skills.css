@@ -48,6 +48,18 @@
     font-size: 0.9rem;
   }
   
+  .skill-icon {
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-affiliation {
+    font-style: italic;
+    color: #00ffff;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
   @media (max-width: 768px) {
     .skills-container {
       padding: 1rem;

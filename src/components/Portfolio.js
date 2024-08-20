@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Camera, Cat, Car, Music, Fish } from 'lucide-react';
+import { ScanEye, Cat, Car} from 'lucide-react';
 import './Portfolio.css';
 import CatBox from '../assets/videos/CatBox.mp4';
 import VisCAT from '../assets/videos/VisCAT.MOV';
 import Mercedes from '../assets/videos/Mercedes.mov';
-import MUSE from '../assets/videos/MUSE.mov'
+import MUSE from '../assets/videos/MUSE.mp4'
 import MuseCover from '../assets/images/MuseCover.png';
 import NemoCover from '../assets/images/NemoCover.png';
 import FindingNemo from '../assets/videos/FindingNemo.MOV';
+import CNN from '../assets/images/architecture.png';
+import CNNResults from '../assets/images/CNNResults.png';
+import NemoResults from '../assets/images/NemoResults.png';
 
 const ProjectCard = ({ title, description, icon, videoUrl, links }) => {
   const Icon = icon;
@@ -44,7 +47,7 @@ const ProjectCard = ({ title, description, icon, videoUrl, links }) => {
   );
 };
 
-const EmphasisedProjectCard = ({ title, description, coverImage, realTitle, videoUrl, links, extraContent }) => {
+const EmphasisedProjectCard = ({ title, description, coverImage, realTitle, videoUrl, links, extraContents, demoDescription }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -71,15 +74,31 @@ const EmphasisedProjectCard = ({ title, description, coverImage, realTitle, vide
             ))}
           </div>
           <div className="extra-content">
-            <h4>Abstract</h4>
-            <p>{extraContent}</p>
+            {extraContents.map((contentItem, index) => (
+              <div key={index} className="extra-content">
+                <h4>{contentItem.title}</h4>
+                <p>{contentItem.content}</p>
+                {contentItem.imageUrl && (
+                  <div className="content-image">
+                    <img src={contentItem.imageUrl} alt="Proposed solution interface" />
+                  </div>
+                )}              
+              </div>
+            ))}
           </div>
           <div className="project-video-container">
-            <h4>Demo</h4>
-            <video autoPlay loop muted className="project-video">
-              <source src={videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="extra-content">
+              <h4>Demo</h4>
+              <p>{demoDescription}</p>
+            </div>
+              {videoUrl && (
+              <div className="project-video-container">
+                <video controls className="project-video">
+                  <source src={videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -90,7 +109,7 @@ const EmphasisedProjectCard = ({ title, description, coverImage, realTitle, vide
 const Portfolio = () => {
   const projects = [
     {
-      icon: Camera,
+      icon: ScanEye,
       title: "🐱 Vis-CAT",
       description: "A captivating test platform to detect 👀 visual cognition deficits of young learners 👾",
       videoUrl: VisCAT,
@@ -123,14 +142,18 @@ const Portfolio = () => {
     {
       coverImage: MuseCover,
       title: "🎶 MUSE: AI recommender",
-      description: "This study proposes a novel approach using visual spectrograms as input, and propose a hybrid model that combines the strength of the Residual neural Network (ResNet) and the Gated Recurrent Unit (GRU). Our research demonstrates significant improvements in music genre classification accuracy and provides insights into the potential of visual representations for audio analysis tasks.",
+      description: "This study proposes a novel approach using visual spectrograms as input, and propose a hybrid model that combines the strength of the Residual neural Network (ResNet) and the Gated Recurrent Unit (GRU). The research demonstrates significant improvements in music genre classification accuracy and provides insights into the potential of visual representations for audio analysis tasks.",
       realTitle: "Music Genre Classification with ResNet and Bi-GRU Using Visual Spectrograms",
       videoUrl: MUSE,
       links: [
         { text: "Paper", url: "https://arxiv.org/abs/2307.10773" },
-        { text: "Site [with big AI model]", url: "https://deeplearnmuse-3t5mgrwzwa-km.a.run.app" }
+        { text: "Github", url: "https://github.com/FionaZZhang/DeepLearnMuse"},
+        { text: "Site [slow due to big AI model]", url: "https://deeplearnmuse-3t5mgrwzwa-km.a.run.app" }
       ],
-      extraContent: `Music recommendation systems have emerged as a vital component to enhance user experience and satisfaction 
+      extraContents: [
+        {
+          title: "Abstract",
+          content: `Music recommendation systems have emerged as a vital component to enhance user experience and satisfaction 
           for the music streaming services, which dominates music consumption. The key challenge in improving these 
           recommender systems lies in comprehending the complexity of music data, specifically for the underpinning 
           music genre classification. The limitations of manual genre classification have highlighted the need for a more 
@@ -144,6 +167,28 @@ const Portfolio = () => {
           (GRU). This model is designed to provide a more comprehensive analysis of music data, offering the 
           potential to improve the music recommender systems through achieving a more comprehensive analysis of 
           music data and hence potentially more accurate genre classification.`
+        },
+        {
+          title: "Model Architecture",
+          content: `The key idea of the proposed architecture is to combine two robust deep learning architectures, 
+                    Residual Network (ResNet) and Bidirectional Gated Recurrent Unit (Bi-GRU), to provide a richer 
+                    set of features for classification which can recognise both spatial hierarchical dependencies and 
+                    temporal dependencies of the input.`,
+          imageUrl: CNN
+        },
+        {
+          title: "Results",
+          content: `The superior performance of the hybrid model (accuracy of 0.81) compared to the others highlights 
+                    its ability to better capture the spatial and temporal dynamics inherent in music data, showcasing 
+                    the benefits of using a hybrid architecture to tackle different aspects of data complexity. `,
+          imageUrl: CNNResults
+        }
+      ],
+      demoDescription: `This proof-of-concept web app was built from scratch and is deployed on Google Cloud. 
+                        It brings my research to life by implementing a real music recommender system. 
+                        A trained deep learning model is used to classify the user's audio into a specific genre, 
+                        and a genre vector is employed to find and recommend the most similar music from a public 
+                        database.`
     },
     {
       coverImage: NemoCover,
@@ -155,7 +200,10 @@ const Portfolio = () => {
         { text: "Project & Paper", url: "https://www.vr-ku.dk/education/vr-course/selected-projects/finding-nemo-in-vr" },
         { text: "Github", url: "https://github.com/FionaZZhang/VR_Object_Tracking" }
       ],
-      extraContent: `The task of finding a hidden input is ubiquitous in 3D Virtual Reality (VR) games or applications, where a 
+      extraContents: [
+        {
+          title: "Abstract",
+          content: `The task of finding a hidden input is ubiquitous in 3D Virtual Reality (VR) games or applications, where a 
           navigation technique is needed to guide the users to the target. However, integrating sensory cues to 
           navigation is an arduous task for game developers due to the difficulties in balancing the sensory output 
           aroused to the user, as well as the unclear interactions between different types of sensory feedback when 
@@ -167,6 +215,18 @@ const Portfolio = () => {
           performance and likability. Our hypothesis is that multi-sensory feedback navigation is more effective 
           than simple visual cue navigation in terms of the users' performance. The results of this study is significant to 
           VR game or application developers in providing more appropriate feedback cues when navigating the player.`
+        },
+        {
+          title: "Results",
+          content: `The combining method of haptic and visual feedback outperformed all other methods in most 
+                    features and exceeded the baseline, while visual-only and haptic-only methods were less effective, 
+                    supporting the hypothesis that a combination of feedback techniques yields the best results.`,
+          imageUrl: NemoResults
+        }
+      ],
+      demoDescription: `This demo video showcases the user testing process. It demonstrates the baseline (simple pointer), 
+                        along with the visual, auditory, and haptic feedback provided to the user, the process of finding Nemo, 
+                        and the data logging procedure for the research.`
     },
   ];
 
@@ -175,21 +235,26 @@ const Portfolio = () => {
       <h1 className="portfolio-title">Selected Work</h1>
 
       <div className="introduction">
-        <p>My interest is rooted in the intersection of Artificial Intelligence (AI) and Human-Computer Interaction (HCI). I am deeply 
-          passionate about creating AI solutions tailored to enhance, simplify, and innovate the ways humans 
-          interact with technology. I hope to democratize AI technology to our fingertips, not only in the realm of research. My work aims not just to push the boundaries of what machines can do, but 
-          also to ensure they do so in ways that are intuitive and enriching for users. If you share this vision or 
-          have related opportunities, please connect with me!</p>
+      <p>My interest lies at the intersection of Artificial Intelligence (AI) and Human-Computer Interaction (HCI). 
+        I am deeply passionate about developing AI solutions that enhance, simplify, and transform the ways humans 
+        interact with technology. My goal is to make AI technology accessible and impactful, extending beyond the 
+        realm of research. If you share this vision or have related opportunities, I would love to connect!</p>
       </div>
       <div className="emphasised-projects-grid">
         {emphasisedProjects.map((project, index) => (
           <EmphasisedProjectCard key={index} {...project} />
         ))}
       </div>
+      <div className="introduction">
+      <p>Web application development / 3D modeling</p>
+      </div>
       <div className="projects-grid">
         {projects.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}
+      </div>
+      <div className="introduction">
+      <p>In my free time, I love dancing and travelling =) I love exploring our planet 🌏 !</p>
       </div>
     </div>
   );

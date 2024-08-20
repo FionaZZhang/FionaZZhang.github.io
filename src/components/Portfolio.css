@@ -173,7 +173,21 @@
 
 .extra-content h4 {
   color: #00ffff;
-  margin-bottom: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.content-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.content-image img {
+  max-height: 600px;
+  max-width: 400px;
+  border-radius: 8px;
 }
 
 .project-links {

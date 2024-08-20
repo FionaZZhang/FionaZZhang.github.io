@@ -47,6 +47,15 @@
   color: #00ffff;
   margin-top: 0;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.org-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  object-fit: contain;
 }
 
 .experience-item p, .education-item p {
@@ -72,6 +81,17 @@
   color: #888;
 }
 
+a {
+  color: #00ffff;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #66ffff;
+  text-decoration: underline;
+}
+
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .experiences-container {
@@ -80,5 +100,11 @@
 
   .experience-item, .education-item {
     padding: 1.5rem;
+  }
+
+  .org-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
   }
 }
