@@ -36,6 +36,7 @@ body {
 
 .nav-link {
   margin-right: 1rem;
+  margin-top: 1rem;
   text-decoration: none;
   color: #00ffff;
   font-weight: 500;

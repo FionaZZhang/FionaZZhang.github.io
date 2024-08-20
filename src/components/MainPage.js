@@ -32,7 +32,7 @@ const MainPage = () => {
         <div className="profile-card">
           <img src={profileImage} alt="Fiona Zhang" className="profile-image" />
           <h2>Fiona Zhang<br /><span className="chinese-name">张骏菲</span></h2>
-          <p>BSc-Computing and Software Systems</p>
+          <p>Machine Learning Engineer</p>
           <div className="social-icons">
             <a href="https://www.linkedin.com/in/fiona-zhang-1153b3226/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href="https://github.com/FionaZZhang?tab=stars" target="_blank" rel="noopener noreferrer">GitHub</a>
