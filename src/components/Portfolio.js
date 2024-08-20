@@ -12,7 +12,7 @@ import CNN from '../assets/images/architecture.png';
 import CNNResults from '../assets/images/CNNResults.png';
 import NemoResults from '../assets/images/NemoResults.png';
 
-const ProjectCard = ({ title, description, icon, videoUrl, links }) => {
+const ProjectCard = ({ title, description, icon, videoUrl, links, award }) => {
   const Icon = icon;
   return (
     <div className="flip-card">
@@ -41,6 +41,7 @@ const ProjectCard = ({ title, description, icon, videoUrl, links }) => {
               </a>
             ))}
           </div>
+          <p className="project-description">{award}</p>
         </div>
       </div>
     </div>
@@ -116,7 +117,13 @@ const Portfolio = () => {
       links: [
         { text: "GitHub", url: "https://github.com/FionaZZhang/Vis-CAT-99" },
         { text: "Demo", url: "https://deploy.d3ltskl8ryle97.amplifyapp.com/Lobby" }
-      ]
+      ],
+      award: (
+        <span>
+          Award: scored 95% in the associated subject, invited to showcase the project at the 
+          <a href="https://melbconnect.com.au/events/2023-tramaganza" target="_blank" rel="noopener noreferrer"> TRAMAGANZA 2023</a> conference in Melbourne.
+        </span>
+      )    
     },
     {
       icon: Cat,
@@ -125,7 +132,13 @@ const Portfolio = () => {
       videoUrl: CatBox,
       links: [
         { text: "GitHub", url: "https://github.com/FionaZZhang/Caption-Writer-Software" },
-      ]
+      ],
+      award: (
+        <span>
+        Award: won 'The Diversity Award' at the 
+        <a href="https://www.linkedin.com/posts/web3-ai-hackfest_web3hackfest-awards-diversity-activity-7105713747377197056-Thm0?utm_source=share&utm_medium=member_desktop" target="_blank" rel="noopener noreferrer"> 2023 Web3 & AI Hackathon</a>.
+        </span>
+      )
     },
     {
       icon: Car,
