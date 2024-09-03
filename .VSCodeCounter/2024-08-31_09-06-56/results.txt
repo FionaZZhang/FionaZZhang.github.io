@@ -1,0 +1,46 @@
+Date : 2024-08-31 09:06:56
+Directory : /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src
+Total : 18 files,  1319 codes, 21 comments, 147 blanks, all 1487 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         11 |        673 |         11 |         44 |        728 |
+| CSS        |          6 |        645 |         10 |        103 |        758 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                   | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                      |         18 |      1,319 |         21 |        147 |      1,487 |
+| . (Files)                                                                              |          8 |        260 |         11 |         45 |        316 |
+| components                                                                             |         10 |      1,059 |         10 |        102 |      1,171 |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                               | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/App.css                    | CSS        |        190 |          3 |         33 |        226 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/App.js                     | JavaScript |         25 |          1 |          2 |         28 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/App.test.js                | JavaScript |          7 |          0 |          2 |          9 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Experiences.css | CSS        |         93 |          2 |         15 |        110 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Experiences.js  | JavaScript |         84 |          2 |          4 |         90 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Header.js       | JavaScript |         19 |          0 |          4 |         23 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/MainPage.js     | JavaScript |         73 |          0 |          5 |         78 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Portfolio.css   | CSS        |        214 |          3 |         32 |        249 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Portfolio.js    | JavaScript |        268 |          0 |          8 |        276 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Research.css    | CSS        |         75 |          1 |         12 |         88 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Research.js     | JavaScript |        112 |          1 |          7 |        120 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Skills.css      | CSS        |         61 |          1 |          9 |         71 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/components/Skills.js       | JavaScript |         60 |          0 |          6 |         66 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/index.css                  | CSS        |         12 |          0 |          2 |         14 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/index.js                   | JavaScript |         12 |          3 |          3 |         18 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/logo.svg                   | XML        |          1 |          0 |          0 |          1 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/reportWebVitals.js         | JavaScript |         12 |          0 |          2 |         14 |
+| /Users/junfzhang/Desktop/Personal/FionaZZhang.github.io/src/setupTests.js              | JavaScript |          1 |          4 |          1 |          6 |
+| Total                                                                                  |            |      1,319 |         21 |        147 |      1,487 |
++----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

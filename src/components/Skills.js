@@ -25,12 +25,11 @@ const Skills = () => {
         <h2>Machine Learning Model Training</h2>
         <p className="skill-affiliation">Background: Using AWS at Mighty Games Group, training models from scratch at CSIRO</p>
         <p className="skill-description">
-          I possess expertise in machine learning model training, specializing in PyTorch. 
+          I am proficient in machine learning model training using in PyTorch. 
           I can implement advanced techniques like PEFT and LoRA for efficient fine-tuning. 
-          I'm proficient in utilizing cloud-based ML platforms such as AWS SageMaker and 
-          Amazon Bedrock for model development and deployment. 
-          I can optimize models for various applications, leveraging both traditional and cutting-edge 
-          methodologies to meet specific project requirements.
+          I am also proficient in using cloud-based ML platforms such as AWS SageMaker, OpenSearch, and 
+          Bedrock for model development and deployment. 
+          I can optimize models for various applications, leveraging both classic and cutting-edge algorithms to meet specific project requirements.
         </p>
       </div>
 
@@ -39,11 +38,11 @@ const Skills = () => {
         <h2>Full Stack Development</h2>
         <p className="skill-affiliation">Background: Full stack development work at Mighty Games Group</p>
         <p className="skill-description">
-          I'm a versatile full stack developer with skills in both frontend and backend technologies. 
+          I am a full stack developer with skills in both frontend and backend technologies. 
           I have expertise in .NET and C# development, with strong object-oriented programming skills in Java and C#.
           My backend capabilities include Python, Flask, RESTful API design. 
           On the frontend, I excel in React and Vue.js. I can deploy applications on cloud platforms like AWS and Google Cloud. 
-          I'm also proficient at version control using Git and SVN. 
+          I am also proficient at version control using Git and SVN. 
         </p>
       </div>
 

@@ -25,8 +25,9 @@ const Experiences = () => {
         </p>
         <p className="location">Melbourne, Australia</p>
         <ul>
-          <li>Spearheaded the development and integration of ML technologies, including computer vision and multi-modal language models, to innovate version one software solutions for game testing. Designed and deployed an advanced internal automated chatbot using the RAG framework, integrating with Slack and Notion to efficiently manage and disseminate internal data.</li>
-          <li>Led research and development initiatives using AWS services, such as SageMaker and Bedrock, to train and optimize ML models, driving continuous exploration in AI tools and capabilities.</li>
+          <li><b>Software Development (.NET C#):</b> Collaborated with specialist engineers and QA analysts in a team of five to develop AI-driven software for game testing and released v1.0 for pilot testing.</li>
+          <li><b>Machine Learning:</b> Integrated computer vision and multi-modal language models into the software, enabling automatic bug detection from screen sources. Designed and deployed an internal chatbot using the RAG framework, integrated with Slack and Notion to manage and disseminate internal data, which improved team productivity.</li>
+          <li><b>Research and Development:</b> Led research and development initiatives using AWS services including SageMaker, Bedrock, and OpenSearch, resulting in expanded company toolsets and documentation.</li>
         </ul>
       </div>
       <div className="experience-item">
@@ -42,8 +43,8 @@ const Experiences = () => {
         </p>
         <p className="location">Melbourne, Australia</p>
         <ul>
-          <li>Focused on deploying and evaluating Private/Local LLMs within secure infrastructures, training them on domain-specific datasets to enhance their utility as expert knowledge systems for specialized use-cases.</li>
-          <li>Key contributions: trained the Mistral model with domain-specific datasets, developed a RAG system for domain-specific Q&A, serving as an MVP for a larger internal project.</li>
+          <li>Trained the Mistral model using PEFT and LoRA on internal HPC with domain-specific datasets, resulting in a 23.39% performance improvement over the base model in specialized use cases.</li>
+          <li>Developed a RAG system for domain-specific Q&A with an easily accessible web interface, serving as a proof of concept for an internal project initiative.</li>
         </ul>
       </div>
       <div className="experience-item">
@@ -59,8 +60,8 @@ const Experiences = () => {
         </p>
         <p className="location">Melbourne, Australia</p>
         <ul>
-          <li>Work as an academic tutor for two undergraduate core algorithm subjects.</li>
-          <li>Key contributions include creating exam questions, assessing assignments and providing assignment feedback, delivering tutorials, and answering queries on the discussion forum.</li>
+          <li><b>Tutoring:</b> Led weekly tutorials on advanced algorithms and data structures, covering sorting algorithms, tree structures, graph algorithms, and dynamic programming.</li>
+          <li><b>Content Development:</b> Collaborated with faculty to develop and review assignments, ensuring smooth submission processes and identifying unmentioned assumptions in specifications. Crafted exam questions that were used in the 2024 final exam.</li>
         </ul>
       </div>
       <h2 className="experiences-title">Education</h2>
