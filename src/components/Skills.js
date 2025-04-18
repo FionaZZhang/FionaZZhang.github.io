@@ -1,6 +1,6 @@
 import React from 'react';
 import './Skills.css';
-import { MessageSquareCode, Brain, Code, GitBranch } from 'lucide-react';
+import { MessageSquareCode, Brain, Code, GitBranch, Server, Network, Shield } from 'lucide-react';
 
 const Skills = () => {
   return (
@@ -58,6 +58,45 @@ const Skills = () => {
           to ensure robust and efficient solutions.
         </p>
       </div>
+
+      <div className="skill-item">
+      <Server className="skill-icon" size={24} color="#00ffff" />
+      <h2>Computer Systems</h2>
+      <p className="skill-affiliation">Background: Graduate coursework at Carnegie Mellon University</p>
+      <p className="skill-description">
+        Proficient in C Programming, with hands-on experience in systems-level development including 
+        data manipulation, security concepts (Buffer Overflow, Bomb, Cache Attacks), memory management (Malloc), 
+        shell programming and system interfaces, and distributed systems implementation (Proxy servers, SFS). 
+        My coursework and projects have equipped me with a strong foundation in low-level systems programming 
+        and performance optimization.
+      </p>
+    </div>
+
+    <div className="skill-item">
+      <Network className="skill-icon" size={24} color="#00ffff" />
+      <h2>Networks</h2>
+      <p className="skill-affiliation">Background: Specialized coursework at Carnegie Mellon University</p>
+      <p className="skill-description">
+        Comprehensive understanding of networking principles across all layers of the OSI model including 
+        application layer protocols (HTTP, DNS, CDNs, P2P), transport layer mechanisms (TCP/UDP, congestion control), 
+        network layer routing (IP, RIP, OSPF, BGP), and data link technologies (Ethernet, VLANs, MPLS). 
+        Additionally experienced with modern networking paradigms including Software Defined Networks, 
+        data center architectures, and wireless systems.
+      </p>
+    </div>
+
+    <div className="skill-item">
+      <Shield className="skill-icon" size={24} color="#00ffff" />
+      <h2>Information Security</h2>
+      <p className="skill-affiliation">Background: Security-focused coursework at Carnegie Mellon University</p>
+      <p className="skill-description">
+        Well-versed in cybersecurity fundamentals including cryptographic principles, access control mechanisms, 
+        vulnerability assessment techniques, and security policy development. My academic training has provided 
+        me with a security engineering perspective that enables me to analyze systems for potential weaknesses 
+        and implement appropriate safeguards, with particular emphasis on software security and network defense 
+        strategies.
+      </p>
+    </div>
     </div>
   );
 };

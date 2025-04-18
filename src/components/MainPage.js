@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../App.css';
 import './Portfolio.css';
-import profileImage from '../assets/images/favicon.png';
+import profileImage from '../assets/images/headpic.png';
 import Portfolio from './Portfolio';
 
 const MainPage = () => {
@@ -42,14 +42,13 @@ const MainPage = () => {
           <div className="introduction-container">
             <div className="introduction">
             <p>
-              Welcome! I am Fiona, a recent BSc in Computing and Software System graduate from The University of Melbourne 👩🏼‍💻. I'm currently working as a Graduate Machine Learning Engineer in the game industry 🕹️.
+            Welcome! I am Fiona 👩🏼‍💻, currently pursuing a Master's degree at Carnegie Mellon University, where I specialize in computer systems and networks. I completed my Bachelor's degree at The University of Melbourne, majoring in software engineering and conducting extensive research in machine learning.
             </p>
             <p>
-              Academically, I am fascinated by natural language processing (NLP) 🧠 and computer vision (CV) 👁️, especially their intersection and how they can push the boundaries of both fields. 
+            Academically, I am captivated by natural language processing (NLP) 🧠 and computer vision (CV) 👁️, particularly their convergence and potential to revolutionize both fields.
             </p>
             <p>
-              Practically, I delve into how NLP and CV can collaborate to drive innovation 🚀. My interest also extends to algorithms and how they can be applied in software engineering 🔍. My goal is to democratize machine learning solutions and maximize their potential in real-world applications 🌟!
-            </p>
+            Professionally, I am a passionate Machine Learning Engineer who investigates how machine learning models can synergize to catalyze innovation 🚀. My mission is to make machine learning solutions accessible and optimize their impact in practical applications 🌟!            </p>
             </div>
           </div>
           <div className="contact-info">

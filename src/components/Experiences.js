@@ -6,6 +6,7 @@ import './Experiences.css';
 import mightyGamesIcon from '../assets/images/mightyIcon.jpg';
 import csiroIcon from '../assets/images/csiroIcon.svg.png';
 import unimelbIcon from '../assets/images/unimelbIcon.png';
+import cmuIcon from '../assets/images/cmu-logo.png'
 
 const Experiences = () => {
   return (
@@ -17,7 +18,7 @@ const Experiences = () => {
           <img src={mightyGamesIcon} alt="Mighty Games icon" className="org-icon" />
           Machine Learning Engineer - Graduate (C#)
         </h3>
-        <p className="date">April 2024 - Present</p>
+        <p className="date">April 2024 - Jan 2025</p>
         <p className="company">
           <a href="https://www.mightybuildandtest.com/" target="_blank" rel="noopener noreferrer">
             Mighty Games Group
@@ -52,7 +53,7 @@ const Experiences = () => {
           <img src={unimelbIcon} alt="University of Melbourne icon" className="org-icon" />
           Algorithms Academic Tutor
         </h3>
-        <p className="date">Feb 2023 - Dec 2023</p>
+        <p className="date">Feb 2023 - Dec 2024</p>
         <p className="company">
           <a href="https://www.unimelb.edu.au/" target="_blank" rel="noopener noreferrer">
             The University of Melbourne
@@ -67,12 +68,24 @@ const Experiences = () => {
       <h2 className="experiences-title">Education</h2>
       <div className="education-item">
         <h3>
+          <img src={cmuIcon} alt="Carnegie Mellon icon" className="org-icon" />
+          <a href="https://www.cmu.edu/ini/" target="_blank" rel="noopener noreferrer">
+            Carnegie Mellon University
+          </a>
+        </h3>
+        <p className="date">Jan 2025 - May 2026</p>
+        <p className="degree">Master of Science - Computer Science (Information Networking)</p>
+        <p className="location">PA, USA</p>
+        <p className="courses">Courses: Information Secrity, Computer Systems, Computer Networks, Business and Management</p>
+      </div>
+      <div className="education-item">
+        <h3>
           <img src={unimelbIcon} alt="University of Melbourne icon" className="org-icon" />
           <a href="https://www.unimelb.edu.au/" target="_blank" rel="noopener noreferrer">
             The University of Melbourne
           </a>
         </h3>
-        <p className="date">2021 - 2023</p>
+        <p className="date">Mar 2021 - Dec 2023</p>
         <p className="degree">Bachelor of Science in Computing and Software Systems</p>
         <p className="location">Melbourne, Australia</p>
         <p className="grade">Grade: 86 (First Class Honours)</p>
