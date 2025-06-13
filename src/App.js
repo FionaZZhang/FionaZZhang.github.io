@@ -8,6 +8,7 @@ import Portfolios from './components/Portfolio';
 import Research from './components/Research';
 import Skills from './components/Skills';
 import Experiences from './components/Experiences';
+import ChatBot from './components/ChatBot';
 
 function App() {
   return (

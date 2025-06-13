@@ -3,6 +3,7 @@ import '../App.css';
 import './Portfolio.css';
 import profileImage from '../assets/images/headpic.png';
 import Portfolio from './Portfolio';
+import ChatBot from './ChatBot';
 
 const MainPage = () => {
   useEffect(() => {
@@ -69,6 +70,7 @@ const MainPage = () => {
           </div>
         </div>
       </div>
+      <ChatBot />
       <Portfolio />
     </>
   );

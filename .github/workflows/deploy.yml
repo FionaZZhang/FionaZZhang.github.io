@@ -1,0 +1,4 @@
+- name: Build
+  run: npm run build
+  env:
+    REACT_APP_OPENAI_API_KEY: ${{ secrets.REACT_APP_OPENAI_API_KEY }}
