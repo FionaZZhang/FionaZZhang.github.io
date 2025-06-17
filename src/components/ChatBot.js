@@ -153,7 +153,7 @@ const ChatBot = () => {
       const data = await response.json();
       setCurrentAnswer(data.choices[0].message.content);
     } catch (error) {
-      console.log('First few chars:', process.env.REACT_APP_OPENAI_API_KEY?.substring(0, 7));
+      console.log('Last few chars:', process.env.REACT_APP_OPENAI_API_KEY?.slice(-7));
       console.error('Error calling OpenAI API:', error);
       setCurrentAnswer("Sorry, I'm having trouble connecting right now. Please try again later or contact Fiona directly at fiona.junfei@gmail.com");
     } finally {
