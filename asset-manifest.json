@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.7fe9bbe4.css",
-    "main.js": "/static/js/main.b544b405.js",
+    "main.css": "/static/css/main.9513459b.css",
+    "main.js": "/static/js/main.ccc586cf.js",
     "static/js/453.1407b060.chunk.js": "/static/js/453.1407b060.chunk.js",
     "static/media/VisCAT.MOV": "/static/media/VisCAT.cfc7419e37da511f43ba.MOV",
     "static/media/FindingNemo.MOV": "/static/media/FindingNemo.e4374e110dc22f99f8a5.MOV",
@@ -19,12 +19,12 @@
     "static/media/unimelbIcon.png": "/static/media/unimelbIcon.a444945a5693d83fbf35.png",
     "static/media/mightyIcon.jpg": "/static/media/mightyIcon.6559135f69cc8e617614.jpg",
     "index.html": "/index.html",
-    "main.7fe9bbe4.css.map": "/static/css/main.7fe9bbe4.css.map",
-    "main.b544b405.js.map": "/static/js/main.b544b405.js.map",
+    "main.9513459b.css.map": "/static/css/main.9513459b.css.map",
+    "main.ccc586cf.js.map": "/static/js/main.ccc586cf.js.map",
     "453.1407b060.chunk.js.map": "/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7fe9bbe4.css",
-    "static/js/main.b544b405.js"
+    "static/css/main.9513459b.css",
+    "static/js/main.ccc586cf.js"
   ]
 }
