@@ -147,6 +147,7 @@ const ChatBot = () => {
       });
 
       if (!response.ok) {
+        console.error('Error Response:', response);
         throw new Error('Failed to get response from OpenAI');
       }
 
