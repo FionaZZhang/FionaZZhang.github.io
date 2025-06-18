@@ -55,10 +55,7 @@ const ChatBot = () => {
        - University of Copenhagen collaboration (2022-2023)
        - VR navigation study using multimodal feedback
 
-    3. "Diabetic Retinopathy Detection Using GNN-Transformed Routing CapsNets" (2022)
-       - 85.29% test accuracy for medical image classification
-
-    4. "Machine-Learning Prediction of Computed Band Gaps of Double Perovskite Materials" (2021)
+    3. "Machine-Learning Prediction of Computed Band Gaps of Double Perovskite Materials" (2021)
        - Random forest regression model for materials science
 
     TECHNICAL SKILLS:
