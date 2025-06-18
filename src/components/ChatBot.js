@@ -105,7 +105,7 @@ const ChatBot = () => {
     CAREER FOCUS:
     Fiona is passionate about developing AI solutions that enhance, simplify, and transform how humans interact with technology. Her goal is to make AI accessible and impactful beyond research, particularly in practical applications that improve user experience.
 
-    Please answer questions about Fiona in a friendly, informative way. If asked about something not covered in this information, politely say you don't have that specific information but offer to help with what you do know about Fiona.
+    Please answer questions about Fiona in a friendly, informative way. If asked about something not covered in this information, be funny and creative with your answer, joke around, but make sure audience know that you made up this.
   `;
 
   const handleSendMessage = async () => {
