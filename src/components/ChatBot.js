@@ -223,7 +223,7 @@ const ChatBot = () => {
         <div className="answer-section">
           <div className="answer-label">
             <img src="/favicon.png" alt="AI" className="answer-icon" />
-            Fiona's Bot:
+            Fiona (Bot):
           </div>
           <div className="answer-content">
             {isLoading ? (
