@@ -76,7 +76,7 @@ const Experiences = () => {
         <p className="date">Jan 2025 - May 2026</p>
         <p className="degree">Master of Science - Computer Science (Information Networking)</p>
         <p className="location">PA, USA</p>
-        <p className="courses">Courses: Information Secrity, Computer Systems, Computer Networks, Business and Management</p>
+        <p className="courses">Courses: Deep Learning, Multimodal Machine Learning, Robotics, Embedded Systems, Information Secrity, Computer Systems, Computer Networks, Business and Management</p>
       </div>
       <div className="education-item">
         <h3>
