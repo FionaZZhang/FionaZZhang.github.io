@@ -31,6 +31,19 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>FionaZhang</title>
+    <script>
+      // Restore the deep link that 404.html stashed, so the address bar keeps
+      // the real path and React Router renders the right page.
+      (function () {
+        var target = sessionStorage.getItem('spaRedirect');
+        if (target) {
+          sessionStorage.removeItem('spaRedirect');
+          if (target !== location.href) {
+            history.replaceState(null, '', target);
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

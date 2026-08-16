@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>FionaZhang</title>
+    <script>
+      // GitHub Pages has no server-side rewrite, so a direct hit on a client
+      // route (e.g. /projects) lands here. Stash the intended URL and bounce to
+      // the app shell, which restores it before React Router reads the path.
+      sessionStorage.setItem('spaRedirect', location.href);
+      location.replace(location.origin + '/');
+    </script>
+  </head>
+  <body></body>
+</html>
