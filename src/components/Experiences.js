@@ -68,23 +68,6 @@ const Experiences = () => {
           <li>Developed a RAG system for domain-specific Q&A with an easily accessible web interface, serving as a proof of concept for an internal project initiative.</li>
         </ul>
       </div>
-      <div className="experience-item">
-        <h3>
-          <img src={unimelbIcon} alt="University of Melbourne icon" className="org-icon" />
-          Algorithms Academic Tutor
-        </h3>
-        <p className="date">Feb 2023 - Dec 2024</p>
-        <p className="company">
-          <a href="https://www.unimelb.edu.au/" target="_blank" rel="noopener noreferrer">
-            The University of Melbourne
-          </a>
-        </p>
-        <p className="location">Melbourne, Australia</p>
-        <ul>
-          <li><b>Tutoring:</b> Led weekly tutorials on advanced algorithms and data structures, covering sorting algorithms, tree structures, graph algorithms, and dynamic programming.</li>
-          <li><b>Content Development:</b> Collaborated with faculty to develop and review assignments, ensuring smooth submission processes and identifying unmentioned assumptions in specifications. Crafted exam questions that were used in the 2024 final exam.</li>
-        </ul>
-      </div>
       </div>
 
       <h2 className="experiences-title">Education</h2>
@@ -122,6 +105,11 @@ const Experiences = () => {
           <li>2021 Melbourne International Undergraduate Scholarship</li>
           <li>2022 Melbourne International Undergraduate Scholarship</li>
           <li>2022 Melbourne Global Scholars Award</li>
+        </ul>
+        <p className="scholarships">Algorithms Academic Tutor (Feb 2023 - Dec 2024):</p>
+        <ul>
+          <li><b>Tutoring:</b> Led weekly tutorials on advanced algorithms and data structures, covering sorting algorithms, tree structures, graph algorithms, and dynamic programming.</li>
+          <li><b>Content Development:</b> Collaborated with faculty to develop and review assignments, ensuring smooth submission processes and identifying unmentioned assumptions in specifications. Crafted exam questions that were used in the 2024 final exam.</li>
         </ul>
       </div>
       </div>

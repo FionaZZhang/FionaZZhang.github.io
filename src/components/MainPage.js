@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import './Portfolio.css';
 import profileImage from '../assets/images/headpic2.png';
@@ -6,6 +6,31 @@ import ChatBot from './ChatBot';
 import WorldMap from './WorldMap';
 
 const MainPage = () => {
+  // macOS hides scrollbars until you scroll, so the bio needs its own cue
+  // that there is more text below.
+  const bioRef = useRef(null);
+  const [bioAtEnd, setBioAtEnd] = useState(false);
+  const [bioScrolls, setBioScrolls] = useState(false);
+
+  useEffect(() => {
+    const el = bioRef.current;
+    if (!el) return undefined;
+
+    const update = () => {
+      const scrollable = el.scrollHeight - el.clientHeight;
+      setBioScrolls(scrollable > 8);
+      setBioAtEnd(scrollable <= 8 || el.scrollTop >= scrollable - 8);
+    };
+
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      el.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
   useEffect(() => {
     const createStars = () => {
       const stars = document.querySelector('.stars');
@@ -40,8 +65,13 @@ const MainPage = () => {
           </div>
         </div>
         <div className="introduction-and-contact">
-          <div className="introduction-container">
-            <div className="introduction">
+          <div
+            className={
+              'introduction-container' +
+              (bioScrolls && !bioAtEnd ? ' has-more' : '')
+            }
+          >
+            <div className="introduction" ref={bioRef}>
             <p>
             Hellooooo! I'm Fiona 👩🏼‍💻, a <strong>Machine Learning Engineer</strong> based in <strong>Melbourne</strong> 🇦🇺. I build AI systems that actually ship, including agents, retrieval systems, evals, and everything in between 🤖.
             </p>
@@ -63,6 +93,9 @@ const MainPage = () => {
             <p className="bio-footnote">
             <em>This website is 99% vibed ✨, thanks to my colleagues Claude Code and ChatGPT 🤖. If something breaks, it was probably the 1% I wrote....</em>
             </p>
+            </div>
+            <div className="scroll-cue" aria-hidden="true">
+              scroll <span>↓</span>
             </div>
           </div>
           <div className="contact-info">
