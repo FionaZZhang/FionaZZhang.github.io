@@ -23,3 +23,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Full-size travel photo originals (web copies live in public/travel)
+travel-originals/
+
+# Build output — GitHub Actions rebuilds this on every push
+/build

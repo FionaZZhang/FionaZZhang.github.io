@@ -7,18 +7,38 @@ import mightyGamesIcon from '../assets/images/mightyIcon.jpg';
 import csiroIcon from '../assets/images/csiroIcon.svg.png';
 import unimelbIcon from '../assets/images/unimelbIcon.png';
 import cmuIcon from '../assets/images/cmu-logo.png'
+import sitemateIcon from '../assets/images/sitemateIcon.png'
 
 const Experiences = () => {
   return (
     <div className="experiences-container">
       <h2 className="experiences-title">Resume</h2>
-      
+
+      <div className="timeline">
+      <div className="experience-item">
+        <h3>
+          <img src={sitemateIcon} alt="Sitemate icon" className="org-icon" />
+          Machine Learning Engineer
+        </h3>
+        <p className="date">Dec 2025 - Sep 2026</p>
+        <p className="company">
+          <a href="https://www.sitemate.com/" target="_blank" rel="noopener noreferrer">
+            Sitemate
+          </a>
+        </p>
+        <p className="location">Melbourne, Australia</p>
+        <ul>
+          <li><b>Knowledge Engine:</b> Built the retrieval layer behind the company's AI agents — a curated, human-reviewed domain knowledge base compiled into an embedded graph database and shipped inside the deployment artifact, giving agents keyword search and link traversal over industry expertise with no network hop and no availability risk.</li>
+          <li><b>Evals:</b> Designed and built the evaluation framework that gates every change to the AI: cases run against the real production agent rather than a test harness, scored both on match-to-reference and model-judged real-world validity. Every production failure becomes a permanent regression case.</li>
+          <li><b>Agentic Systems:</b> Worked across the AI platform on LLM agent pipelines that turn customer documents into structured product templates, including document parsing, tool design, and long-running asynchronous job orchestration.</li>
+        </ul>
+      </div>
       <div className="experience-item">
         <h3>
           <img src={mightyGamesIcon} alt="Mighty Games icon" className="org-icon" />
           Machine Learning Engineer - Graduate (C#)
         </h3>
-        <p className="date">April 2024 - Jan 2025</p>
+        <p className="date">April 2024 - Dec 2025</p>
         <p className="company">
           <a href="https://www.mightybuildandtest.com/" target="_blank" rel="noopener noreferrer">
             Mighty Games Group
@@ -65,7 +85,11 @@ const Experiences = () => {
           <li><b>Content Development:</b> Collaborated with faculty to develop and review assignments, ensuring smooth submission processes and identifying unmentioned assumptions in specifications. Crafted exam questions that were used in the 2024 final exam.</li>
         </ul>
       </div>
+      </div>
+
       <h2 className="experiences-title">Education</h2>
+
+      <div className="timeline">
       <div className="education-item">
         <h3>
           <img src={cmuIcon} alt="Carnegie Mellon icon" className="org-icon" />
@@ -76,7 +100,10 @@ const Experiences = () => {
         <p className="date">Jan 2025 - May 2026</p>
         <p className="degree">Master of Science - Computer Science (Information Networking)</p>
         <p className="location">PA, USA</p>
-        <p className="courses">Courses: Deep Learning, Multimodal Machine Learning, Robotics, Embedded Systems, Information Secrity, Computer Systems, Computer Networks, Business and Management</p>
+        <p className="courses">Courses: Deep Learning, Multimodal Machine Learning, Robotics, Embedded Systems, Information Security, Computer Systems, Computer Networks, Business and Management</p>
+        <ul>
+          <li>Teaching assistant for 11777 Multimodal Machine Learning</li>
+        </ul>
       </div>
       <div className="education-item">
         <h3>
@@ -96,6 +123,7 @@ const Experiences = () => {
           <li>2022 Melbourne International Undergraduate Scholarship</li>
           <li>2022 Melbourne Global Scholars Award</li>
         </ul>
+      </div>
       </div>
     </div>
   );

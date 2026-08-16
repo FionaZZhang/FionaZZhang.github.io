@@ -11,11 +11,31 @@ import FindingNemo from '../assets/videos/FindingNemo.MOV';
 import CNN from '../assets/images/architecture.png';
 import CNNResults from '../assets/images/CNNResults.png';
 import NemoResults from '../assets/images/NemoResults.png';
+import F1TenthCover from '../assets/images/f1tenthTrajectories.png';
+import F1TenthTraining from '../assets/images/f1tenthTraining.png';
+import F1TenthSacVsPP from '../assets/images/f1tenthSacVsPP.png';
+import F1TenthCrossSim from '../assets/images/f1tenthCrossSim.png';
+import F1TenthPerception from '../assets/images/f1tenthPerception.png';
+import ALMHero from '../assets/images/almHero.png';
+import ALMMismatch from '../assets/images/almMismatchTypes.png';
+import ALMPipeline from '../assets/images/almPipeline.png';
+import ALMQlora from '../assets/images/almQlora.png';
+import ALMComparison from '../assets/images/almComparison.png';
+import EmoFidVad from '../assets/images/emofidVadTrajectory.png';
+import EmoFidTraining from '../assets/images/emofidTraining.png';
+import EmoFidEmbedding from '../assets/images/emofidEmbedding.png';
+import EmoFidCrossTurn from '../assets/images/emofidCrossTurn.png';
+import EmoFidTurnTransitions from '../assets/images/emofidTurnTransitions.png';
+import MoonRangerCover from '../assets/images/moonrangerCover.jpg';
 
-const ProjectCard = ({ title, description, icon, videoUrl, links, award }) => {
+const ProjectCard = ({ title, icon, videoUrl, links, award }) => {
   const Icon = icon;
+  const [flipped, setFlipped] = useState(false);
   return (
-    <div className="flip-card">
+    <div
+      className={`flip-card${flipped ? ' is-flipped' : ''}`}
+      onClick={() => setFlipped((f) => !f)}
+    >
       <div className="flip-card-inner">
         <div className="flip-card-front">
           <div className="icon-circle">
@@ -25,7 +45,6 @@ const ProjectCard = ({ title, description, icon, videoUrl, links, award }) => {
         </div>
         <div className="flip-card-back">
           <h3 className="project-title">{title}</h3>
-          <p className="project-description">{description}</p>
           {videoUrl && (
             <div className="project-video-container">
               <video controls className="project-video">
@@ -48,17 +67,27 @@ const ProjectCard = ({ title, description, icon, videoUrl, links, award }) => {
   );
 };
 
-const EmphasisedProjectCard = ({ title, description, coverImage, realTitle, videoUrl, links, extraContents, demoDescription }) => {
+const EmphasisedProjectCard = ({ title, description, coverImage, coverContain, realTitle, videoUrl, links, extraContents, demoDescription }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
-      className="emphasised-project-card"
+    <div
+      className={`emphasised-project-card${isHovered ? ' is-open' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setIsHovered((open) => !open)}
     >
       <div className="emphasised-project-content">
-        <div className="cover-image" style={{ backgroundImage: `url(${coverImage})` }}></div>
+        {coverImage ? (
+          <div
+            className={`cover-image${coverContain ? ' cover-contain' : ''}`}
+            style={{ backgroundImage: `url(${coverImage})` }}
+          ></div>
+        ) : (
+          <div className="cover-image cover-placeholder">
+            <span>Image coming soon</span>
+          </div>
+        )}
         <h3 className="project-title">{title}</h3>
         <p className="project-description">{description}</p>
       </div>
@@ -87,20 +116,22 @@ const EmphasisedProjectCard = ({ title, description, coverImage, realTitle, vide
               </div>
             ))}
           </div>
-          <div className="project-video-container">
-            <div className="extra-content">
-              <h4>Demo</h4>
-              <p>{demoDescription}</p>
-            </div>
-              {videoUrl && (
-              <div className="project-video-container">
-                <video controls className="project-video">
-                  <source src={videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+          {(videoUrl || demoDescription) && (
+            <div className="project-video-container">
+              <div className="extra-content">
+                <h4>Demo</h4>
+                <p>{demoDescription}</p>
               </div>
-            )}
-          </div>
+              {videoUrl && (
+                <div className="project-video-container">
+                  <video controls className="project-video">
+                    <source src={videoUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -112,11 +143,10 @@ const Portfolio = () => {
     {
       icon: ScanEye,
       title: "🐱 Vis-CAT",
-      description: "A captivating test platform to detect 👀 visual cognition deficits of young learners 👾",
       videoUrl: VisCAT,
       links: [
         { text: "GitHub", url: "https://github.com/FionaZZhang/Vis-CAT-99" },
-        { text: "Demo", url: "https://deploy.d3ltskl8ryle97.amplifyapp.com/Lobby" }
+        { text: "Demo", url: "https://deploy.d3ltskl8ryle97.amplifyapp.com/" }
       ],
       award: (
         <span>
@@ -128,7 +158,6 @@ const Portfolio = () => {
     {
       icon: Cat,
       title: "🐈 CATBOX",
-      description: "A web platform to explore the creativity 🦄 of language models!",
       videoUrl: CatBox,
       links: [
         { text: "GitHub", url: "https://github.com/FionaZZhang/Caption-Writer-Software" },
@@ -143,12 +172,215 @@ const Portfolio = () => {
     {
       icon: Car,
       title: "🏎️ Doomsday Mercedes",
-      description: "This surreal animation portraits a 🪐 magical reality that carries my vision of the future...",
       videoUrl: Mercedes,
       links: [
         { text: "GitHub", url: "https://github.com/FionaZZhang/3DMercedes" },
       ]
     },
+  ];
+
+  const roboticsProjects = [
+    {
+      coverImage: F1TenthCover,
+      coverContain: true,
+      title: "🏁 F1TENTH Autonomous Racing",
+      description: "A 1/10-scale autonomous race car that drives from LiDAR alone. I built the full stack — emergency braking, wall following, gap following, pure pursuit, RRT planning, camera perception — then trained a Soft Actor-Critic policy end-to-end and raced it at the F1TENTH competition at UPenn.",
+      realTitle: "From Classical Control to Deep RL on a 1/10-Scale Race Car",
+      links: [
+        { text: "GitHub", url: "https://github.com/FionaZZhang/f1tenth" },
+        { text: "Paper", url: `${process.env.PUBLIC_URL}/assets/f1tenth-paper.pdf` }
+      ],
+      extraContents: [
+        {
+          title: "The Stack",
+          content: `The car runs on ROS 2 with a 1080-beam LiDAR and a RealSense camera. I worked through the full
+                    autonomy arc: instantaneous time-to-collision emergency braking with a bicycle-model side-slip
+                    correction, PID wall following, a disparity-extender gap follower, adaptive-lookahead pure pursuit
+                    over recorded waypoints, and RRT motion planning on a 200x200 local occupancy grid with mixed
+                    forward-biased and obstacle-aware sampling.`
+        },
+        {
+          title: "Perception",
+          content: `A camera pipeline for lane detection and object distance estimation — HSV lane masking with
+                    contour filtering, checkerboard intrinsic calibration to back-project bounding boxes onto the
+                    ground plane, and a small custom YOLO-style detector running on 180x320 input.`,
+          imageUrl: F1TenthPerception
+        },
+        {
+          title: "Deep RL: Soft Actor-Critic",
+          content: `I replaced the hand-tuned controllers with a learned policy: 108 downsampled LiDAR beams plus
+                    normalised velocity (111-dim observation) mapped straight to steering and speed. Trained with
+                    SB3 SAC on two simulators — a fast in-house kinematic bicycle model and the real f110_gym with
+                    RK4 dynamics — and deployed as a ROS 2 inference node at 50 Hz.`,
+          imageUrl: F1TenthTraining
+        },
+        {
+          title: "Results",
+          content: `SAC reaches 74% of Pure Pursuit's reward using only LiDAR — no waypoints, no pose — and is
+                    remarkably consistent (return std of 0.11 over 100 episodes). Inference costs ~65us on CPU,
+                    770x faster than the control loop needs.`,
+          imageUrl: F1TenthSacVsPP
+        },
+        {
+          title: "The Interesting Failure",
+          content: `Sim-to-sim transfer collapses. A policy trained on the kinematic simulator crashes within ~200
+                    steps every single time on the real f110_gym — it never had to learn slip or single-track lateral
+                    dynamics, so its actions saturate at the steering clip. Quantifying that gap turned out to be the
+                    most useful result of the project: training on the wrong dynamics buys you nothing.`,
+          imageUrl: F1TenthCrossSim
+        }
+      ]
+    },
+    {
+      coverImage: MoonRangerCover,
+      title: "🌙 MoonRanger Lunar Rover (NASA)",
+      description: "Mission control software for NASA's MoonRanger — a rover slated to fly to the lunar south pole in 2029 to search for water ice. I built the Waypoints feature for autonomous navigation, plus FTP functionality and its command interfaces.",
+      realTitle: "MoonRanger Lunar Rover Mission — Mission Control Software",
+      links: [
+        { text: "Link", url: "https://www.cmu.edu/news/stories/archives/2025/august/carnegie-mellons-moonranger-slated-to-fly-on-2029-lunar-mission" }
+      ],
+      extraContents: [
+        {
+          title: "The Mission",
+          content: `MoonRanger is a Carnegie Mellon-built autonomous rover selected to fly on a 2029 lunar mission,
+                    tasked with detecting water ice at the Moon's south pole. It operates without continuous
+                    communication with Earth, so the ground software has to plan and verify autonomous behaviour
+                    rather than drive the rover directly.`
+        },
+        {
+          title: "What I Built",
+          content: `I contributed to the mission control software in Go and Vue, containerised with Docker. My main
+                    piece was the Waypoints feature for autonomous navigation — the interface operators use to
+                    specify and manage the route the rover drives on its own. I also implemented FTP functionality
+                    and the associated command interfaces for moving data to and from the rover, and maintained and
+                    improved the team's CI/CD pipeline.`
+        },
+        {
+          title: "Stack",
+          content: `Go, Vue, Docker, CI/CD.`
+        }
+      ]
+    }
+  ];
+
+  const almProjects = [
+    {
+      coverImage: EmoFidVad,
+      coverContain: true,
+      title: "🎭 Emotional Fidelity in Audio Language Models",
+      description: "Audio language models sound human — but can they stay emotionally in character across a whole conversation? We built an evaluation framework to find out, then fine-tuned Qwen2.5-Omni to play Chandler, Ross and Phoebe from Friends.",
+      realTitle: "Emotional Fidelity in Audio Language Models (CMU 11-777, Aug 2025 – May 2026)",
+      links: [
+        { text: "Paper", url: `${process.env.PUBLIC_URL}/assets/emotional-fidelity-paper.pdf` }
+      ],
+      extraContents: [
+        {
+          title: "The Question",
+          content: `Current ALMs generate convincingly human-like speech, but whether they preserve emotional
+                    consistency and authenticity across a two-person conversation is largely unexplored. We asked:
+                    if you replace one speaker in a dyadic dialogue with an ALM, does the emotional thread survive?
+                    Standard TTS pipelines "flatten" affect — text alone can't carry Chandler's sarcasm or Phoebe's
+                    tonal swerves, so the synthesiser has nothing to condition on.`
+        },
+        {
+          title: "Data",
+          content: `We built a character-specific dialogue dataset from Friends-MMC — roughly 3,000 samples and
+                    ~6 hours of multi-turn conversational audio per character, for Chandler, Ross and Phoebe. Each
+                    sample pairs the merged audio and transcript of every preceding turn in the scene with the
+                    character's actual response, so the model sees how the conversation sounded, not just what it said.`,
+          imageUrl: EmoFidTurnTransitions
+        },
+        {
+          title: "Method: Selective Fine-Tuning",
+          content: `We compared three paradigms — a cascaded LLM+TTS baseline, in-context prompting with
+                    Qwen3-Omni-Flash (zero- and few-shot), and our proposed fine-tune. The fine-tune applies LoRA
+                    (r=16, alpha=32) to the Thinker module of Qwen2.5-Omni while keeping the multimodal encoder and
+                    the Talker speech synthesiser completely frozen. That's the key design choice: all the learning
+                    capacity goes into persona-conditioned reasoning, and none of it can degrade the pre-trained
+                    speech quality.`,
+          imageUrl: EmoFidTraining
+        },
+        {
+          title: "Evaluation Framework",
+          content: `Four families of metrics, because no single one captures emotional authenticity. VAD distance
+                    measures L2 error against ground truth in valence-arousal-dominance space using a CSER probe
+                    (WavLM + BiLSTM), normalised to strip out timbre. Emotion similarity is cosine distance between
+                    emo2vec embeddings. Three expert annotators rated 100 utterances per character on emotional
+                    rationality, naturalness and response relevance. Finally, an ALM judge scored 11 dimensions of
+                    realism spanning prosody, emotion, identity and narrative fit.`,
+          imageUrl: EmoFidEmbedding
+        },
+        {
+          title: "Results",
+          content: `Fine-tuning converged stably — 43.37% loss reduction over 94 steps with steady gradient norms,
+                    and most of the adaptation happening in the first half of training. The fine-tuned ALM
+                    outperformed both the cascaded baseline and few-shot prompting on every metric family. Per
+                    character, Chandler was easiest to match (his sarcastic delivery is highly consistent) and
+                    Phoebe hardest — her emotional range is genuinely unpredictable. Human ratings correlated
+                    strongly with the automatic metrics, which is what makes the framework usable.`,
+          imageUrl: EmoFidCrossTurn
+        },
+        {
+          title: "Limitations",
+          content: `Friends audio carries a laugh track, so background acoustics contaminate the emotion probes.
+                    High-context irony remains hard — sarcasm depends on knowledge the model doesn't have. And
+                    emotional consistency degrades over long conversations, which is precisely the thing we set out
+                    to measure.`
+        }
+      ]
+    },
+    {
+      coverImage: ALMHero,
+      coverContain: true,
+      title: "🫂 When \"I'm Fine\" Isn't Fine",
+      description: "People mask their feelings — saying positive words while their voice says otherwise. We fine-tuned an audio language model to notice that gap and respond to it, rather than taking the words at face value.",
+      realTitle: "Response Strategy Selection Under Acoustic-Semantic Emotional Incongruence in Supportive Dialogue",
+      links: [
+        { text: "Paper", url: `${process.env.PUBLIC_URL}/assets/alm-emotion-paper.pdf` },
+        { text: "Poster", url: `${process.env.PUBLIC_URL}/assets/alm-emotion-poster.pdf` }
+      ],
+      extraContents: [
+        {
+          title: "The Problem",
+          content: `"I'm fine." — said with a trembling voice. Emotional support systems read text only, so they miss
+                    the disconnect entirely. We ask a question nobody had studied systematically: when a system detects
+                    that what you say and how you sound disagree, how should it actually respond? We split the problem
+                    into two kinds of incongruence — masking (positive words, negative voice) and overstatement
+                    (negative words, calmer voice) — which turn out to need different strategies.`,
+          imageUrl: ALMMismatch
+        },
+        {
+          title: "Pipeline",
+          content: `We mine acoustic-semantic incongruent utterances from MELD by comparing ground-truth audio emotion
+                    against a DistilRoBERTa text sentiment classifier, then evaluate four response strategies:
+                    text-only, audio-only, naive fusion, and explicit mismatch acknowledgment.`,
+          imageUrl: ALMPipeline
+        },
+        {
+          title: "Fine-Tuning the ALM",
+          content: `Prompting exposed a trade-off — explicitly telling the model to acknowledge the mismatch raised
+                    acknowledgment to 73.7% but made responses noticeably less natural. So we QLoRA fine-tuned
+                    Qwen2-Audio to learn the behaviour instead of being instructed into it: 7M of 7B parameters
+                    trained, loss down 95% (18.7 to 0.86), token accuracy 35% to 93%.`,
+          imageUrl: ALMQlora
+        },
+        {
+          title: "Results",
+          content: `The fine-tuned ALM more than triples mismatch acknowledgment over the audio baseline (21.1% to
+                    69.0%) and scores the highest empathy of every method tested (+156% vs baseline, +44% vs the best
+                    prompting strategy) — while sounding more natural than prompting did. Treating modality conflict
+                    as signal rather than noise is the whole idea.`,
+          imageUrl: ALMComparison
+        },
+        {
+          title: "Where It Breaks",
+          content: `Short utterances ("Okay!", "Hey!") carry too little semantic content to judge (~15% of errors),
+                    compliments and narration get misread as self-expression (~10%), and sarcasm doesn't fit the
+                    binary masking/overstatement taxonomy at all (~8%). Next steps: sarcasm as a third type,
+                    multi-turn dialogue context, and strategy-specific fine-tuning.`
+        }
+      ]
+    }
   ];
 
   const emphasisedProjects = [
@@ -245,29 +477,37 @@ const Portfolio = () => {
 
   return (
     <div className="portfolio-container">
-      <h1 className="portfolio-title">Selected Work</h1>
+      <h1 className="portfolio-title">Projects</h1>
 
-      <div className="introduction">
-      <p>My interest lies at the intersection of Artificial Intelligence (AI) and Human-Computer Interaction (HCI). 
-        I am deeply passionate about developing AI solutions that enhance, simplify, and transform the ways humans 
-        interact with technology. My goal is to make AI technology accessible and impactful, extending beyond the 
-        realm of research. If you share this vision or have related opportunities, I would love to connect!</p>
+      <h2 className="section-title">🤖 Robotics</h2>
+      <div className="emphasised-projects-grid">
+        {roboticsProjects.map((project, index) => (
+          <EmphasisedProjectCard key={index} {...project} />
+        ))}
       </div>
+
+      <h2 className="section-title">🔊 Audio Language Models</h2>
+      <div className="introduction">
+      <p>Teaching models to understand what people mean, not just what they say.</p>
+      </div>
+      <div className="emphasised-projects-grid">
+        {almProjects.map((project, index) => (
+          <EmphasisedProjectCard key={index} {...project} />
+        ))}
+      </div>
+
+      <h2 className="section-title">📄 Research</h2>
       <div className="emphasised-projects-grid">
         {emphasisedProjects.map((project, index) => (
           <EmphasisedProjectCard key={index} {...project} />
         ))}
       </div>
-      <div className="introduction">
-      <p>Web application development / 3D modeling</p>
-      </div>
+
+      <h2 className="section-title">🛠️ Web Development & 3D Modeling</h2>
       <div className="projects-grid">
         {projects.map((project, index) => (
           <ProjectCard key={index} {...project} />
         ))}
-      </div>
-      <div className="introduction">
-      <p>In my free time, I love dancing and travelling =) I love exploring our planet 🌏 !</p>
       </div>
     </div>
   );

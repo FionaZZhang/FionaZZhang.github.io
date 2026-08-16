@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import '../App.css';
 import './Portfolio.css';
-import profileImage from '../assets/images/headpic.png';
-import Portfolio from './Portfolio';
+import profileImage from '../assets/images/headpic2.png';
 import ChatBot from './ChatBot';
+import WorldMap from './WorldMap';
 
 const MainPage = () => {
   useEffect(() => {
@@ -43,13 +43,26 @@ const MainPage = () => {
           <div className="introduction-container">
             <div className="introduction">
             <p>
-            Welcome! I am Fiona 👩🏼‍💻, currently pursuing a Master's degree at Carnegie Mellon University, where I specialize in computer systems and networks. I completed my Bachelor's degree at The University of Melbourne, majoring in software engineering and conducting extensive research in machine learning.
+            Hellooooo! I'm Fiona 👩🏼‍💻, a <strong>Machine Learning Engineer</strong> based in <strong>Melbourne</strong> 🇦🇺. I build AI systems that actually ship, including agents, retrieval systems, evals, and everything in between 🤖.
             </p>
             <p>
-            Academically, I am captivated by natural language processing (NLP) 🧠 and computer vision (CV) 👁️, particularly their convergence and potential to revolutionize both fields.
+            Academically, I've always had a bit of serial curiosity 🧐: I get excited about something, dive deep into it, and somehow end up somewhere completely different.
             </p>
             <p>
-            Professionally, I am a passionate Machine Learning Engineer who investigates how machine learning models can synergize to catalyze innovation 🚀. My mission is to make machine learning solutions accessible and optimize their impact in practical applications 🌟!            </p>
+            I did my bachelor's at the <strong>University of Melbourne</strong> 🎓, where I started out studying physics 🪐 before eventually specialising in <strong>Computer Software Systems</strong> 💻. Somewhere along the way, I also studied Virtual Reality 🥽 at the University of Copenhagen 🇩🇰. I did my master's at <strong>Carnegie Mellon University</strong> 🎓, where I continued trying a little bit of everything: computer networks 🌐, information security 🔐, autonomous racing cars 🏎️, and training LLMs 🧠.
+            </p>
+            <p>
+            If you ask me what my dream job is, I'd probably still say astrophysicist 🔭. More realistically, I'd love to eventually work somewhere in the space or rocket industry 🚀. I'm not quite there yet 😬...
+            </p>
+            <p>
+            This website isn't only about work, tho 👀.
+            </p>
+            <p>
+            Outside of work, you'll usually find me plotting my next trip ✈️. My partner and I are trying to make the most of Australia's generous workplace benefits and become part-time digital nomads 🌏, working from different corners of the world whenever we can.
+            </p>
+            <p className="bio-footnote">
+            <em>This website is 99% vibed ✨, thanks to my colleagues Claude Code and ChatGPT 🤖. If something breaks, it was probably the 1% I wrote....</em>
+            </p>
             </div>
           </div>
           <div className="contact-info">
@@ -58,7 +71,7 @@ const MainPage = () => {
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <span>fiona.junfei@gmail.com</span>
+              <span>fiona.junfei.work@gmail.com</span>
             </div>
             <div className="contact-item">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -70,8 +83,8 @@ const MainPage = () => {
           </div>
         </div>
       </div>
+      <WorldMap />
       <ChatBot />
-      <Portfolio />
     </>
   );
 };

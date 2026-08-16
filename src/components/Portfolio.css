@@ -1,44 +1,75 @@
 /* Portfolio.css */
 .portfolio-container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 0;
-  background-color: rgba(10, 10, 10, 0.8);
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.1);
+  margin: 3.5rem auto 5rem;
+  padding: 0 2rem;
 }
 
 .portfolio-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   text-align: center;
+  margin: 0 0 3.5rem;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+  margin: 4rem 0 1.75rem;
+  padding: 0;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), transparent);
+  opacity: 0.55;
+}
+
+.portfolio-container .introduction {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
   margin-bottom: 2rem;
-  color: #00ffff;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  max-width: 720px;
+}
+
+.portfolio-container .introduction p {
+  margin: 0;
 }
 
 .emphasised-projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 0 2rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.75rem;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 0 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
 }
 
+/* ---------- Flip cards ---------- */
 .flip-card {
   background-color: transparent;
-  width: 350px;
-  height: 500px;
-  perspective: 1000px;
-  margin: 0 auto;
+  width: 100%;
+  height: 340px;
+  perspective: 1200px;
 }
 
 .flip-card-inner {
@@ -46,12 +77,12 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.6s;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   transform-style: preserve-3d;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.1);
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner,
+.flip-card.is-flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -61,47 +92,94 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 8px;
+  border-radius: var(--radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 1.75rem;
   box-sizing: border-box;
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  color: var(--muted);
 }
 
-.flip-card-front {
-  background-color: rgba(30, 30, 30, 0.8);
-  color: #e0e0e0;
+.flip-card-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 130% 60% at 50% 118%, var(--glow) 0%, transparent 62%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep card content above the glow wash */
+.flip-card-front > *,
+.flip-card-back > * {
+  position: relative;
+  z-index: 1;
 }
 
 .flip-card-back {
-  background-color: rgba(30, 30, 30, 0.8);
-  color: #e0e0e0;
   transform: rotateY(180deg);
+  justify-content: flex-start;
+  overflow-y: auto;
 }
 
+.icon-circle {
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 24px;
+  margin-bottom: 1.4rem;
+  color: var(--accent-bright);
+  background: linear-gradient(150deg, rgba(255, 95, 162, 0.14), rgba(139, 61, 219, 0.14));
+  border: 1px solid var(--border-mid);
+  box-shadow: 0 0 32px rgba(255, 95, 162, 0.18);
+}
+
+.flip-card-front .project-title {
+  text-align: center;
+  margin: 0;
+}
+
+/* ---------- Emphasised cards ---------- */
 .emphasised-project-card {
-  background-color: rgba(30, 30, 30, 0.8);
-  border-radius: 8px;
-  padding: 1.5rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.1);
+  text-align: left;
+  box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
-  height: 400px;
-  transition: all 0.3s ease-in-out;
+  height: 430px;
+  backdrop-filter: blur(12px);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.emphasised-project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-mid);
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.65), 0 0 45px rgba(255, 95, 162, 0.14);
 }
 
 .emphasised-project-content {
   transition: opacity 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.emphasised-project-card:hover .emphasised-project-content {
+.emphasised-project-card:hover .emphasised-project-content,
+.emphasised-project-card.is-open .emphasised-project-content {
   opacity: 0;
 }
 
@@ -111,46 +189,122 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(30, 30, 30, 0.95);
+  background: linear-gradient(180deg, rgba(22, 12, 34, 0.97) 0%, rgba(10, 6, 18, 0.98) 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
-  padding: 1rem;
+  padding: 1.6rem;
   box-sizing: border-box;
   overflow-y: auto;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
-.emphasised-project-card:hover .emphasised-project-hover {
+.emphasised-project-card:hover .emphasised-project-hover,
+.emphasised-project-card.is-open .emphasised-project-hover {
   opacity: 1;
 }
 
+/* Full-bleed cover with a fade into the card */
 .cover-image {
   width: 100%;
-  height: 200px;
+  height: 210px;
   background-size: cover;
   background-position: center;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cover-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(12, 7, 20, 0.85) 100%);
+}
+
+.cover-contain {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+}
+
+.cover-contain::after {
+  display: none;
+}
+
+.cover-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, rgba(255, 95, 162, 0.08), rgba(139, 61, 219, 0.08));
+  border-bottom: 1px dashed var(--border-mid);
+  color: var(--accent-bright);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.emphasised-project-content .project-title {
+  margin: 1.25rem 1.5rem 0.6rem;
+}
+
+.emphasised-project-content .project-description {
+  margin: 0 1.5rem 1.5rem;
 }
 
 .project-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 0 0 0.5rem 0;
-  color: #00ffff;
-  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  margin: 0 0 0.6rem 0;
 }
 
 .project-description {
-  font-size: 0.9rem;
-  color: #b0b0b0;
+  font-size: 0.87rem;
+  line-height: 1.7;
+  color: var(--muted);
   margin-bottom: 1rem;
   overflow-y: auto;
-  max-height: 150px;
-  width: 100%;
+}
+
+.emphasised-project-hover h4 {
+  font-family: var(--font-display);
+  color: var(--accent-bright);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: left;
+  margin: 0 0 0.65rem 0;
+}
+
+.extra-content {
+  text-align: left;
+  color: var(--muted);
+  margin-top: 1.3rem;
+  font-size: 0.85rem;
+  line-height: 1.75;
+}
+
+.extra-content p {
+  margin: 0;
+}
+
+.content-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.9rem 0 0;
+}
+
+.content-image img {
+  max-height: 400px;
+  max-width: 100%;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid var(--border-soft);
 }
 
 .project-video-container {
@@ -160,90 +314,146 @@
 
 .project-video {
   width: 100%;
-  max-height: 200px;
+  max-height: 220px;
   object-fit: cover;
-  border-radius: 8px;
-}
-
-.extra-content {
-  text-align: left;
-  color: #b0b0b0;
-  margin-top: 1rem;
-}
-
-.extra-content h4 {
-  color: #00ffff;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.content-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.content-image img {
-  max-height: 600px;
-  max-width: 400px;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
 }
 
 .project-links {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  margin-bottom: 1rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
   width: 100%;
+}
+
+.flip-card-back .project-links {
+  justify-content: center;
 }
 
 .project-link {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: #00ffff;
-  color: #1a1a1a;
+  padding: 0.45rem 1.1rem;
+  background: rgba(255, 95, 162, 0.09);
+  border: 1px solid var(--border-mid);
+  color: var(--accent-bright);
   text-decoration: none;
-  border-radius: 4px;
-  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  margin: 0.25rem;
-  font-size: 0.9rem;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
 }
 
 .project-link:hover {
-  background-color: #00cccc;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  background: var(--grad);
+  border-color: transparent;
+  color: #1a0a18;
+  box-shadow: 0 6px 20px rgba(255, 95, 162, 0.4);
+}
+
+@media (max-width: 900px) {
+  .emphasised-projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
+  .portfolio-container {
+    padding: 0 1rem;
+    margin-top: 2rem;
+  }
+
   .emphasised-projects-grid,
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
-  
-  .flip-card,
+
+  .portfolio-title {
+    font-size: 2.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 0.9rem;
+    letter-spacing: 0.16em;
+    margin: 2.75rem 0 1.25rem;
+  }
+
+  /* Let cards size to their text so nothing clips mid-sentence */
   .emphasised-project-card {
-    width: 100%;
-    max-width: 300px;
+    height: auto;
+    min-height: 380px;
+  }
+
+  .emphasised-project-hover {
+    position: absolute;
+    min-height: 100%;
+  }
+
+  .cover-image {
+    height: 185px;
+  }
+
+  .flip-card {
+    height: 300px;
   }
 }
 
-/* Scrollbar styles for webkit browsers */
-.emphasised-project-hover::-webkit-scrollbar {
-  width: 8px;
+@media (max-width: 480px) {
+  .portfolio-title {
+    font-size: 1.85rem;
+  }
+
+  .emphasised-project-card {
+    min-height: 360px;
+  }
+
+  .emphasised-project-hover {
+    padding: 1.15rem;
+  }
+
+  .cover-image {
+    height: 170px;
+  }
+
+  .emphasised-project-content .project-title,
+  .emphasised-project-content .project-description {
+    margin-left: 1.1rem;
+    margin-right: 1.1rem;
+  }
+
+  .icon-circle {
+    width: 72px;
+    height: 72px;
+  }
 }
 
-.emphasised-project-hover::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+/* Scrollbars */
+.emphasised-project-hover::-webkit-scrollbar,
+.flip-card-back::-webkit-scrollbar,
+.project-description::-webkit-scrollbar {
+  width: 6px;
 }
 
-.emphasised-project-hover::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 255, 255, 0.5);
+.emphasised-project-hover::-webkit-scrollbar-track,
+.flip-card-back::-webkit-scrollbar-track,
+.project-description::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.emphasised-project-hover::-webkit-scrollbar-thumb,
+.flip-card-back::-webkit-scrollbar-thumb,
+.project-description::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent), var(--accent-3));
   border-radius: 4px;
 }
 
-/* Scrollbar styles for Firefox */
-.emphasised-project-hover {
+.emphasised-project-hover,
+.flip-card-back,
+.project-description {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 255, 255, 0.5) rgba(0, 0, 0, 0.1);
+  scrollbar-color: var(--accent-3) rgba(255, 255, 255, 0.04);
 }
