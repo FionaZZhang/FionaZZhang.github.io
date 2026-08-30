@@ -1,17 +1,17 @@
 /* src/components/WorldMap.css - minimal black & white map */
 
 .world-map-section {
-  max-width: 1200px;
+  max-width: var(--page-max);
   margin: 0 auto 2.5rem auto;
-  padding: 0 2rem;
+  padding: 0 var(--gutter);
 }
 
 .world-map-frame {
   position: relative;
   /* Near-opaque so the fixed starfield behind the page does not show through */
-  background: #0f0a17;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   padding: 2rem 1.75rem 1.5rem;
 }
 
@@ -24,9 +24,9 @@
 .wm-title {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   letter-spacing: 0.02em;
-  color: #f2f2f2;
+  color: var(--text);
   margin: 0 0 0.4rem;
 }
 
@@ -40,14 +40,14 @@
 .wm-intro {
   margin: 0;
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--muted);
 }
 
 .wm-legend {
   margin: 0.85rem 0 0;
   font-size: 0.78rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--muted);
 }
 
 .wm-legend-row {
@@ -59,7 +59,7 @@
 .wm-legend dt {
   flex-shrink: 0;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--text);
 }
 
 .wm-legend dd {
@@ -85,15 +85,15 @@
 }
 
 .wm-land {
-  fill: rgba(255, 255, 255, 0.14);
-  stroke: rgba(255, 255, 255, 0.3);
+  fill: rgba(255, 255, 255, 0.10);
+  stroke: var(--line-2);
   stroke-width: 0.8;
   stroke-linejoin: round;
 }
 
 /* Hairline from a nudged dot back to its true coordinates */
 .wm-leader {
-  stroke: rgba(255, 255, 255, 0.22);
+  stroke: var(--line-2);
   stroke-width: 0.6;
 }
 
@@ -107,9 +107,20 @@
   fill: transparent;
 }
 
+.wm-home {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.wm-dot:hover .wm-home,
+.wm-dot.is-active .wm-home { stroke: var(--blue-2); }
+
 .wm-dot-core {
   fill: #ffffff;
-  stroke: #0b0608;
+  stroke: var(--bg);
   stroke-width: 1.2;
   transition: r 0.2s ease;
 }
@@ -125,8 +136,8 @@
   position: absolute;
   z-index: 5;
   width: 230px;
-  background: #101010;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: var(--panel-2);
+  border: 1px solid var(--line-2);
   border-radius: 10px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
   overflow: hidden;
@@ -137,7 +148,7 @@
 /* Pinned: the card stays put and becomes clickable */
 .wm-card.is-pinned {
   pointer-events: auto;
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--muted);
 }
 
 /* Position relative to the dot, flipping near the edges */
@@ -150,7 +161,7 @@
 .wm-card-media {
   position: relative;
   height: 140px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--bg-2);
   overflow: hidden;
 }
 
@@ -218,12 +229,12 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--line-2);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
 .wm-pip.is-on {
-  background: #ffffff;
+  background: var(--blue);
 }
 
 /* Close button, shown only while pinned */
@@ -267,7 +278,7 @@
   font-size: 0.64rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--dim);
 }
 
 /* Optional one-liner; only rendered when a place has one */
@@ -275,7 +286,7 @@
   margin: -0.35rem 0 0.85rem;
   font-size: 0.76rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--muted);
   font-style: italic;
 }
 
@@ -289,7 +300,7 @@
 
 .wm-rating-label {
   font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--muted);
 }
 
 .wm-stars {
@@ -299,11 +310,11 @@
 }
 
 .wm-star {
-  color: rgba(255, 255, 255, 0.15);
+  color: var(--line-2);
 }
 
 .wm-star-on {
-  color: #ffffff;
+  color: var(--blue);
 }
 
 @media (max-width: 768px) {
@@ -346,31 +357,60 @@
     margin-bottom: 1.1rem;
   }
 
-  .world-map-canvas {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-
-  .world-map-svg {
-    min-width: 620px;
-  }
-
-  .wm-dot-core {
-    r: 5.5;
-  }
-
+  /* Bottom sheet: the map keeps its height and never jumps, and the sheet
+     stays put while you tap through dots. */
   .wm-card {
-    position: static;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
     width: 100%;
     transform: none;
-    margin-top: 0.9rem;
+    margin: 0;
+    z-index: 200;
     pointer-events: auto;
+    border: 1px solid var(--line-2);
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -14px 40px rgba(0, 0, 0, 0.6);
+    max-height: 62vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-top: 0;
+    animation: wm-sheet-up 0.26s cubic-bezier(0.22, 0.9, 0.3, 1);
   }
 
-  .wm-card-media {
-    height: 190px;
+  @keyframes wm-sheet-up {
+    from { transform: translateY(100%); }
+    to   { transform: translateY(0); }
+  }
+
+  /* Photo beside the text, not above it, so the sheet stays short and the
+     map is still visible behind it. */
+  .wm-card.is-sheet {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .wm-card.is-sheet .wm-card-media {
+    width: 44%;
+    max-width: 175px;
+    height: auto;
+    min-height: 138px;
+    flex-shrink: 0;
+    border-radius: 12px 0 0 0;
+  }
+
+  .wm-card.is-sheet .wm-card-body {
+    flex: 1;
+    min-width: 0;
+    padding: 0.6rem 0.9rem 0.9rem;
+  }
+
+  .wm-card.is-sheet .wm-card-caption {
+    margin: -0.2rem 0 0.6rem;
   }
 
   /* Nav arrows are always usable on touch, where there is no hover */
@@ -384,5 +424,72 @@
     right: 8px;
     width: 26px;
     height: 26px;
+  }
+}
+
+/* ---------- Zoom + pan ---------- */
+.world-map-canvas {
+  /* Let the page scroll vertically under the finger until the map is zoomed;
+     once zoomed, the map takes over the gesture so it can be panned. */
+  touch-action: pan-y;
+}
+
+.world-map-canvas.is-zoomed { touch-action: none; }
+.world-map-canvas.is-zoomed .world-map-svg { cursor: grab; }
+.world-map-canvas.is-zoomed .world-map-svg:active { cursor: grabbing; }
+
+.wm-zoom {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 4;
+}
+
+.wm-zoom button {
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--line-2);
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.wm-zoom button:hover { border-color: var(--blue); color: var(--blue-2); }
+.wm-zoom-reset { font-size: 0.7rem !important; letter-spacing: 0.08em; }
+
+/* Hint only where pinch is plausible */
+.wm-hint {
+  display: none;
+  position: absolute;
+  left: 4px;
+  bottom: 2px;
+  margin: 0;
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .wm-zoom button { min-width: 34px; height: 34px; }
+  .wm-hint { display: block; }
+
+  /* Use the full screen width so the map is as large as it can be */
+  .world-map-frame {
+    padding: 1.1rem 0.75rem 1.4rem;
+  }
+
+  .world-map-canvas {
+    margin: 0 -0.75rem;
+    padding: 0 0.35rem;
   }
 }

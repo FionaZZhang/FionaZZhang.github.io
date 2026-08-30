@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ScanEye, Cat, Car} from 'lucide-react';
 import './Portfolio.css';
+import Reveal from './Reveal';
 import CatBox from '../assets/videos/CatBox.mp4';
 import VisCAT from '../assets/videos/VisCAT.MOV';
 import Mercedes from '../assets/videos/Mercedes.mov';
@@ -28,13 +29,57 @@ import EmoFidCrossTurn from '../assets/images/emofidCrossTurn.png';
 import EmoFidTurnTransitions from '../assets/images/emofidTurnTransitions.png';
 import MoonRangerCover from '../assets/images/moonrangerCover.jpg';
 
+/**
+ * Distinguishes a genuine tap from a scroll drag, so swiping down the page over
+ * a card never opens it. Also closes when the next interaction lands outside.
+ */
+const useTapOpen = () => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  const start = useRef(null);
+
+  const onPointerDown = (e) => {
+    start.current = { x: e.clientX, y: e.clientY, t: Date.now() };
+  };
+
+  const onPointerUp = (e) => {
+    const s = start.current;
+    start.current = null;
+    if (!s) return;
+    const moved = Math.abs(e.clientX - s.x) + Math.abs(e.clientY - s.y);
+    if (moved > 10 || Date.now() - s.t > 700) return;   // a scroll, not a tap
+    setOpen((v) => !v);
+  };
+
+  const onPointerCancel = () => { start.current = null; };
+
+  const close = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onDocDown = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+    };
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('pointerdown', onDocDown);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('pointerdown', onDocDown);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  return { open, setOpen, close, ref, tapProps: { onPointerDown, onPointerUp, onPointerCancel } };
+};
+
 const ProjectCard = ({ title, icon, videoUrl, links, award }) => {
   const Icon = icon;
-  const [flipped, setFlipped] = useState(false);
+  const { open: flipped, close, ref, tapProps } = useTapOpen();
   return (
     <div
+      ref={ref}
       className={`flip-card${flipped ? ' is-flipped' : ''}`}
-      onClick={() => setFlipped((f) => !f)}
+      {...tapProps}
     >
       <div className="flip-card-inner">
         <div className="flip-card-front">
@@ -43,7 +88,15 @@ const ProjectCard = ({ title, icon, videoUrl, links, award }) => {
           </div>
           <h3 className="project-title">{title}</h3>
         </div>
-        <div className="flip-card-back">
+        <div className="flip-card-back" onPointerUp={(e) => e.stopPropagation()}>
+          <button
+            type="button"
+            className="project-close"
+            onPointerUp={(e) => { e.stopPropagation(); close(); }}
+            aria-label="Close"
+          >
+            ×
+          </button>
           <h3 className="project-title">{title}</h3>
           {videoUrl && (
             <div className="project-video-container">
@@ -68,14 +121,15 @@ const ProjectCard = ({ title, icon, videoUrl, links, award }) => {
 };
 
 const EmphasisedProjectCard = ({ title, description, coverImage, coverContain, realTitle, videoUrl, links, extraContents, demoDescription }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const { open: isHovered, setOpen: setIsHovered, close, ref, tapProps } = useTapOpen();
 
   return (
     <div
+      ref={ref}
       className={`emphasised-project-card${isHovered ? ' is-open' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => setIsHovered((open) => !open)}
+      {...tapProps}
     >
       <div className="emphasised-project-content">
         {coverImage ? (
@@ -92,7 +146,18 @@ const EmphasisedProjectCard = ({ title, description, coverImage, coverContain, r
         <p className="project-description">{description}</p>
       </div>
       {isHovered && (
-        <div className="emphasised-project-hover">
+        <div
+          className="emphasised-project-hover"
+          onPointerUp={(e) => e.stopPropagation()}
+        >
+          <button
+            type="button"
+            className="project-close"
+            onPointerUp={(e) => { e.stopPropagation(); close(); }}
+            aria-label="Close"
+          >
+            ×
+          </button>
           <div className="extra-content">
             <h4>{realTitle}</h4>
           </div>
@@ -477,16 +542,14 @@ const Portfolio = () => {
 
   return (
     <div className="portfolio-container">
-      <h1 className="portfolio-title">Projects</h1>
-
-      <h2 className="section-title">🤖 Robotics</h2>
+      <Reveal as="h2" className="section-title">Robotics</Reveal>
       <div className="emphasised-projects-grid">
         {roboticsProjects.map((project, index) => (
           <EmphasisedProjectCard key={index} {...project} />
         ))}
       </div>
 
-      <h2 className="section-title">🔊 Audio Language Models</h2>
+      <Reveal as="h2" className="section-title">Audio Language Models</Reveal>
       <div className="introduction">
       <p>Teaching models to understand what people mean, not just what they say.</p>
       </div>
@@ -496,14 +559,14 @@ const Portfolio = () => {
         ))}
       </div>
 
-      <h2 className="section-title">📄 Research</h2>
+      <Reveal as="h2" className="section-title">Research</Reveal>
       <div className="emphasised-projects-grid">
         {emphasisedProjects.map((project, index) => (
           <EmphasisedProjectCard key={index} {...project} />
         ))}
       </div>
 
-      <h2 className="section-title">🛠️ Web Development & 3D Modeling</h2>
+      <Reveal as="h2" className="section-title">Web Development & 3D Modeling</Reveal>
       <div className="projects-grid">
         {projects.map((project, index) => (
           <ProjectCard key={index} {...project} />

@@ -12,7 +12,6 @@ import sitemateIcon from '../assets/images/sitemateIcon.png'
 const Experiences = () => {
   return (
     <div className="experiences-container">
-      <h2 className="experiences-title">Resume</h2>
 
       <div className="timeline">
       <div className="experience-item">

@@ -1,28 +1,23 @@
 // src/App.js
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
-import MainPage from './components/MainPage';
-import Portfolios from './components/Portfolio';
-import Skills from './components/Skills';
-import Experiences from './components/Experiences';
+import Home from './components/Home';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <div className="cosmos" aria-hidden="true">
-          <div className="cosmos-galaxy"></div>
-          <div className="cosmos-sunset"></div>
-          <div className="cosmos-planet"></div>
-        </div>
+        <div className="cosmos" aria-hidden="true" />
         <Header />
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/projects" element={<Portfolios />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/experiences" element={<Experiences />} />
+          <Route path="/" element={<Home />} />
+          {/* The site used to be multi-page; keep those links working. */}
+          <Route path="/projects" element={<Navigate to="/#work" replace />} />
+          <Route path="/experiences" element={<Navigate to="/#resume" replace />} />
+          <Route path="/skills" element={<Navigate to="/#skills" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </Router>

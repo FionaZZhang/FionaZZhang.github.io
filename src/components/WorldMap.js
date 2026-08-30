@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import './WorldMap.css';
-import { WORLD_LAND_PATH, WORLD_VIEWBOX, WORLD_VIEW } from './worldLandPath';
+import { WORLD_LAND_PATH, WORLD_VIEW } from './worldLandPath';
 
 // Projection canvas. WORLD_VIEW is the visible crop of it.
 const W = 1000;
@@ -117,14 +117,52 @@ const Stars = ({ score }) => (
   </span>
 );
 
+const MAX_ZOOM = 8;
+const BASE_DOT_R = 4.5;
+const BASE = WORLD_VIEW;
+
+const clampView = (v) => {
+  // Never zoom out past the whole world, and never pan outside it.
+  const w = Math.min(BASE.w, Math.max(BASE.w / MAX_ZOOM, v.w));
+  const h = w * (BASE.h / BASE.w);
+  return {
+    w,
+    h,
+    x: Math.min(BASE.x + BASE.w - w, Math.max(BASE.x, v.x)),
+    y: Math.min(BASE.y + BASE.h - h, Math.max(BASE.y, v.y))
+  };
+};
+
+// Below this width the card becomes a bottom sheet, so it must not be
+// positioned next to its dot.
+const SHEET_QUERY = '(max-width: 640px)';
+
 const WorldMap = () => {
+  const [isSheet, setIsSheet] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(SHEET_QUERY).matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(SHEET_QUERY);
+    const onChange = (e) => setIsSheet(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
   // Hover previews a place; clicking a dot pins the card so it can be used.
   const [hovered, setHovered] = useState(null);
   const [pinned, setPinned] = useState(null);
   const [missing, setMissing] = useState({});
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [view, setView] = useState(BASE);
+
+  const svgRef = useRef(null);
+  const pointers = useRef(new Map());   // active pointers, for pinch
+  const gesture = useRef({ dist: 0, mid: null, moved: false });
 
   const active = pinned || hovered;
+  const zoom = BASE.w / view.w;
+  const isZoomed = zoom > 1.02;
 
   const dots = useMemo(() => {
     const base = PLACES.map((p) => {
@@ -136,33 +174,25 @@ const WorldMap = () => {
 
   const activeDot = dots.find((d) => d.slug === active) || null;
 
-  // Photos are optional: render the slots that have not 404'd.
   const photos = activeDot
     ? Array.from({ length: MAX_PHOTOS }, (_, i) => i + 1)
         .filter((n) => !missing[`${activeDot.slug}-${n}`])
     : [];
 
-  // Restart the carousel whenever the shown place changes.
-  useEffect(() => {
-    setPhotoIndex(0);
-  }, [active]);
+  useEffect(() => { setPhotoIndex(0); }, [active]);
 
-  // A photo 404ing can shrink the list under the current index.
   const safeIndex = photos.length ? Math.min(photoIndex, photos.length - 1) : 0;
 
-  const step = useCallback(
-    (delta) => {
-      if (photos.length < 2) return;
-      setPhotoIndex((i) => (i + delta + photos.length) % photos.length);
-    },
-    [photos.length]
-  );
+  const step = useCallback((delta) => {
+    if (photos.length < 2) return;
+    setPhotoIndex((i) => (i + delta + photos.length) % photos.length);
+  }, [photos.length]);
 
   const togglePin = (slug) => {
+    if (gesture.current.moved) return;          // a drag, not a tap
     setPinned((current) => (current === slug ? null : slug));
   };
 
-  // Escape closes a pinned card; arrows page through its photos.
   useEffect(() => {
     if (!pinned) return undefined;
     const onKey = (e) => {
@@ -174,15 +204,98 @@ const WorldMap = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [pinned, step]);
 
-  // Flip the card to the other side / above when the dot sits near an edge.
-  const cardSide = activeDot && activeDot.x > WORLD_VIEW.x + WORLD_VIEW.w * 0.62 ? 'left' : 'right';
-  const cardVert = activeDot && activeDot.y > WORLD_VIEW.y + WORLD_VIEW.h * 0.58 ? 'up' : 'down';
+  /* ---------------- zoom + pan ---------------- */
+
+  // Scale about a client point so the world stays put under the fingers.
+  const zoomAt = (clientX, clientY, factor) => {
+    const rect = svgRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setView((v) => {
+      const fx = (clientX - rect.left) / rect.width;
+      const fy = (clientY - rect.top) / rect.height;
+      const wx = v.x + fx * v.w;
+      const wy = v.y + fy * v.h;
+      const w = v.w / factor;
+      const h = v.h / factor;
+      return clampView({ x: wx - fx * w, y: wy - fy * h, w, h });
+    });
+  };
+
+  const panBy = (dxClient, dyClient) => {
+    const rect = svgRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setView((v) => clampView({
+      ...v,
+      x: v.x - (dxClient / rect.width) * v.w,
+      y: v.y - (dyClient / rect.height) * v.h
+    }));
+  };
+
+  const onPointerDown = (e) => {
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    gesture.current.moved = false;
+    if (pointers.current.size === 2) {
+      const [a, b] = [...pointers.current.values()];
+      gesture.current.dist = Math.hypot(a.x - b.x, a.y - b.y);
+    }
+  };
+
+  const onPointerMove = (e) => {
+    const prev = pointers.current.get(e.pointerId);
+    if (!prev) return;
+    const next = { x: e.clientX, y: e.clientY };
+    pointers.current.set(e.pointerId, next);
+
+    if (pointers.current.size === 2) {
+      // Pinch: scale by the change in finger separation.
+      const [a, b] = [...pointers.current.values()];
+      const dist = Math.hypot(a.x - b.x, a.y - b.y);
+      if (gesture.current.dist > 0) {
+        zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, dist / gesture.current.dist);
+      }
+      gesture.current.dist = dist;
+      gesture.current.moved = true;
+      return;
+    }
+
+    // Single pointer drags the map, but only once zoomed in — otherwise the
+    // page must stay scrollable under the finger.
+    if (!isZoomed) return;
+    const dx = next.x - prev.x;
+    const dy = next.y - prev.y;
+    if (Math.abs(dx) + Math.abs(dy) > 2) gesture.current.moved = true;
+    if (gesture.current.moved) panBy(dx, dy);
+  };
+
+  const endPointer = (e) => {
+    pointers.current.delete(e.pointerId);
+    if (pointers.current.size < 2) gesture.current.dist = 0;
+    // let the click handler see the flag, then clear it
+    setTimeout(() => { gesture.current.moved = false; }, 0);
+  };
+
+  const onWheel = (e) => {
+    if (!e.ctrlKey && !e.metaKey) return;   // don't hijack normal page scroll
+    e.preventDefault();
+    zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12);
+  };
+
+  const zoomCentre = (factor) => {
+    const rect = svgRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    zoomAt(rect.left + rect.width / 2, rect.top + rect.height / 2, factor);
+  };
+
+  // Counter-scale dots so they keep a constant on-screen size while zoomed.
+  const dotR = BASE_DOT_R * (view.w / BASE.w);
+
+  const cardSide = activeDot && activeDot.x > view.x + view.w * 0.62 ? 'left' : 'right';
+  const cardVert = activeDot && activeDot.y > view.y + view.h * 0.58 ? 'up' : 'down';
 
   return (
     <section className="world-map-section">
       <div className="world-map-frame">
         <div className="wm-header">
-          <h2 className="wm-title">My footprints</h2>
           <div className="wm-header-body">
           <p className="wm-intro">
             Places I&apos;ve travelled to, some of my favorite photos, along with my completely subjective rankings of them 🌏
@@ -203,14 +316,21 @@ const WorldMap = () => {
           </div>
         </div>
 
-        <div className="world-map-canvas">
+        <div className={`world-map-canvas${isZoomed ? ' is-zoomed' : ''}`}>
           <svg
+            ref={svgRef}
             className="world-map-svg"
-            viewBox={WORLD_VIEWBOX}
+            viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
             role="img"
             aria-label="Map of places I have travelled to"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={endPointer}
+            onPointerCancel={endPointer}
+            onPointerLeave={endPointer}
+            onWheel={onWheel}
           >
-            <path className="wm-land" d={WORLD_LAND_PATH} />
+            <path className="wm-land" d={WORLD_LAND_PATH} vectorEffect="non-scaling-stroke" />
 
             {dots.map((d) => {
               const moved = Math.abs(d.x - d.trueX) + Math.abs(d.y - d.trueY) > 2.5;
@@ -218,10 +338,8 @@ const WorldMap = () => {
                 <line
                   key={`leader-${d.slug}`}
                   className="wm-leader"
-                  x1={d.trueX}
-                  y1={d.trueY}
-                  x2={d.x}
-                  y2={d.y}
+                  x1={d.trueX} y1={d.trueY} x2={d.x} y2={d.y}
+                  vectorEffect="non-scaling-stroke"
                 />
               ) : null;
             })}
@@ -239,37 +357,69 @@ const WorldMap = () => {
                 onBlur={() => setHovered(null)}
                 onClick={() => togglePin(d.slug)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    togglePin(d.slug);
-                  }
+                  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePin(d.slug); }
                 }}
                 tabIndex={0}
                 role="button"
                 aria-pressed={pinned === d.slug}
                 aria-label={d.name}
               >
-                <circle className="wm-dot-hit" cx={d.x} cy={d.y} r="12" />
-                <circle className="wm-dot-core" cx={d.x} cy={d.y} r="4.5" />
+                <circle className="wm-dot-hit" cx={d.x} cy={d.y} r={dotR * 3.6} />
+                {d.slug === 'melbourne' ? (
+                  /* home */
+                  <g
+                    className="wm-home"
+                    transform={`translate(${d.x} ${d.y}) scale(${
+                      ((active === d.slug ? dotR * 1.35 : dotR) / 4.5) * 0.95
+                    })`}
+                    vectorEffect="non-scaling-stroke"
+                  >
+                    <path d="M-6.4 -0.6 L0 -6.6 L6.4 -0.6" vectorEffect="non-scaling-stroke" />
+                    <path d="M-4.6 -1.1 V5 H4.6 V-1.1" vectorEffect="non-scaling-stroke" />
+                    <path d="M-1.5 5 V1.5 H1.5 V5" vectorEffect="non-scaling-stroke" />
+                  </g>
+                ) : (
+                  <circle
+                    className="wm-dot-core"
+                    cx={d.x} cy={d.y}
+                    r={active === d.slug ? dotR * 1.55 : dotR}
+                    vectorEffect="non-scaling-stroke"
+                  />
+                )}
               </g>
             ))}
           </svg>
 
+          <p className="wm-hint" aria-hidden="true">Zoom and tap</p>
+          <div className="wm-zoom" role="group" aria-label="Zoom">
+            <button type="button" onClick={() => zoomCentre(1 / 1.6)} aria-label="Zoom out">−</button>
+            <button type="button" onClick={() => zoomCentre(1.6)} aria-label="Zoom in">+</button>
+            {isZoomed && (
+              <button type="button" className="wm-zoom-reset" onClick={() => setView(BASE)}>
+                Reset
+              </button>
+            )}
+          </div>
+
           {activeDot && (
             <div
               className={
-                `wm-card wm-card-${cardSide} wm-card-${cardVert}` +
+                `wm-card${isSheet ? ' is-sheet' : ` wm-card-${cardSide} wm-card-${cardVert}`}` +
                 `${pinned ? ' is-pinned' : ''}`
               }
-              style={{
-                left: `${((activeDot.x - WORLD_VIEW.x) / WORLD_VIEW.w) * 100}%`,
-                top: `${((activeDot.y - WORLD_VIEW.y) / WORLD_VIEW.h) * 100}%`
-              }}
+              /* Anchored to its dot on desktop; a bottom sheet on phones, where
+                 an inline left/top would override the fixed positioning. */
+              style={
+                isSheet
+                  ? undefined
+                  : {
+                      left: `${((activeDot.x - view.x) / view.w) * 100}%`,
+                      top: `${((activeDot.y - view.y) / view.h) * 100}%`
+                    }
+              }
             >
               {photos.length > 0 && (
                 <div className="wm-card-media">
-                  {/* All slots stay mounted so onError can prune missing files,
-                      but only the current one is shown. */}
                   {photos.map((n, i) => (
                     <img
                       key={n}
@@ -277,38 +427,18 @@ const WorldMap = () => {
                       src={`${process.env.PUBLIC_URL}/travel/${activeDot.slug}-${n}.jpg`}
                       alt={activeDot.name}
                       onError={() =>
-                        setMissing((prev) => ({
-                          ...prev,
-                          [`${activeDot.slug}-${n}`]: true
-                        }))
+                        setMissing((prev) => ({ ...prev, [`${activeDot.slug}-${n}`]: true }))
                       }
                     />
                   ))}
 
                   {photos.length > 1 && (
                     <>
-                      <button
-                        type="button"
-                        className="wm-nav wm-nav-prev"
-                        onClick={() => step(-1)}
-                        aria-label="Previous photo"
-                      >
-                        ‹
-                      </button>
-                      <button
-                        type="button"
-                        className="wm-nav wm-nav-next"
-                        onClick={() => step(1)}
-                        aria-label="Next photo"
-                      >
-                        ›
-                      </button>
+                      <button type="button" className="wm-nav wm-nav-prev" onClick={() => step(-1)} aria-label="Previous photo">‹</button>
+                      <button type="button" className="wm-nav wm-nav-next" onClick={() => step(1)} aria-label="Next photo">›</button>
                       <div className="wm-pips">
                         {photos.map((n, i) => (
-                          <span
-                            key={n}
-                            className={`wm-pip${i === safeIndex ? ' is-on' : ''}`}
-                          />
+                          <span key={n} className={`wm-pip${i === safeIndex ? ' is-on' : ''}`} />
                         ))}
                       </div>
                     </>
@@ -317,22 +447,13 @@ const WorldMap = () => {
               )}
 
               {pinned && (
-                <button
-                  type="button"
-                  className="wm-close"
-                  onClick={() => setPinned(null)}
-                  aria-label="Close"
-                >
-                  ×
-                </button>
+                <button type="button" className="wm-close" onClick={() => setPinned(null)} aria-label="Close">×</button>
               )}
 
               <div className="wm-card-body">
                 <h4 className="wm-card-title">{activeDot.name}</h4>
                 <p className="wm-card-region">{activeDot.region}</p>
-                {activeDot.caption && (
-                  <p className="wm-card-caption">{activeDot.caption}</p>
-                )}
+                {activeDot.caption && <p className="wm-card-caption">{activeDot.caption}</p>}
                 <div className="wm-rating">
                   <span className="wm-rating-label">Fun</span>
                   <Stars score={activeDot.fun} />

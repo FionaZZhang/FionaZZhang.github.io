@@ -1,205 +1,146 @@
-/* src/components/Experiences.css */
+/* Experiences.css — grey + blue timeline */
 .experiences-container {
-  max-width: 1100px;
-  margin: 3.5rem auto 5rem;
-  padding: 0 2rem;
+  max-width: 900px;
+  margin: 0 auto 5rem;
+  padding: 0 var(--gutter);
   color: var(--text);
 }
 
 .experiences-title {
   font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-align: center;
-  margin: 0 0 3.5rem;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 3.5rem 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.experiences-title ~ .experiences-title,
-.timeline + .experiences-title {
-  margin-top: 4.5rem;
-  font-size: 2.1rem;
+.experiences-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
 }
 
-/* ---------- Timeline ---------- */
 .timeline {
   position: relative;
-  padding-left: 2.75rem;
+  padding-left: 1.9rem;
 }
 
-/* Continuous rail down the left */
 .timeline::before {
   content: '';
   position: absolute;
-  left: 7px;
-  top: 1.5rem;
-  bottom: 1.5rem;
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 45%, var(--accent-3) 80%, transparent 100%);
-  opacity: 0.5;
+  left: 4px;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  width: 1px;
+  background: var(--line-2);
 }
 
 .experience-item, .education-item {
-  background: var(--surface-1);
-  border: 1px solid var(--border-soft);
+  background: var(--panel);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 1.9rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
-  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  padding: 1.6rem;
+  margin-bottom: 1rem;
   position: relative;
+  transition: border-color 0.25s ease;
 }
 
-/* Node dot on the rail */
 .experience-item::before, .education-item::before {
   content: '';
   position: absolute;
-  left: -2.75rem;
-  top: 2rem;
-  width: 16px;
-  height: 16px;
+  left: -1.9rem;
+  top: 1.75rem;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: var(--bg-deep);
-  border: 2px solid var(--accent);
-  box-shadow: 0 0 14px var(--glow);
-  transition: all 0.35s ease;
+  background: var(--bg);
+  border: 2px solid var(--line-2);
+  transition: all 0.25s ease;
 }
 
+.experience-item:hover, .education-item:hover { border-color: var(--line-2); }
 .experience-item:hover::before, .education-item:hover::before {
-  background: var(--accent);
-  box-shadow: 0 0 22px rgba(255, 95, 162, 0.7);
-}
-
-.experience-item:hover, .education-item:hover {
-  transform: translateX(5px);
-  border-color: var(--border-mid);
-  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.65), 0 0 45px rgba(255, 95, 162, 0.14);
+  border-color: var(--blue);
+  background: var(--blue);
 }
 
 .experience-item h3, .education-item h3 {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.08rem;
   font-weight: 600;
   color: var(--text);
-  margin-top: 0;
-  margin-bottom: 0.85rem;
+  margin: 0 0 0.7rem;
   display: flex;
   align-items: center;
 }
 
 .org-icon {
-  width: 32px;
-  height: 32px;
-  margin-right: 12px;
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
   object-fit: contain;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 3px;
-  box-sizing: border-box;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px;
 }
 
 .experience-item p, .education-item p {
-  margin: 0.35rem 0;
+  margin: 0.25rem 0;
   color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.75;
+  font-size: 0.86rem;
+  line-height: 1.7;
 }
 
 .experience-item ul, .education-item ul {
-  padding-left: 1.1rem;
-  margin-top: 1.1rem;
+  padding-left: 1rem;
+  margin-top: 0.9rem;
   list-style: none;
 }
 
 .experience-item li, .education-item li {
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.6rem;
   color: var(--muted);
-  font-size: 0.88rem;
-  line-height: 1.75;
+  font-size: 0.86rem;
+  line-height: 1.7;
   position: relative;
 }
 
 .experience-item li::before, .education-item li::before {
   content: '';
   position: absolute;
-  left: -1.1rem;
-  top: 0.64em;
-  width: 5px;
-  height: 5px;
+  left: -1rem;
+  top: 0.66em;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: var(--accent-2);
-  box-shadow: 0 0 8px var(--glow-2);
+  background: var(--blue);
 }
 
-.experience-item li b, .education-item li b {
-  color: var(--text);
-  font-weight: 600;
-}
+.experience-item li b, .education-item li b { color: var(--text); font-weight: 600; }
 
 .date {
-  color: var(--accent-bright) !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.18em;
+  color: var(--blue) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.company, .location, .degree, .grade, .activities, .scholarships {
-  color: var(--dim) !important;
-}
+.company, .location, .degree, .grade, .activities, .scholarships { color: var(--dim) !important; }
+.courses { color: var(--muted) !important; }
 
-.courses {
-  color: var(--muted) !important;
-}
+a { color: var(--blue-2); text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--blue); }
 
-a {
-  color: var(--accent-bright);
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
-}
-
-a:hover {
-  color: var(--accent);
-  text-decoration: underline;
-}
-
-/* Responsive design for smaller screens */
 @media (max-width: 768px) {
-  .experiences-container {
-    padding: 0 1rem;
-  }
-
-  .experiences-title {
-    font-size: 2.1rem;
-  }
-
-  .timeline {
-    padding-left: 1.6rem;
-  }
-
-  .timeline::before {
-    left: 3px;
-  }
-
-  .experience-item, .education-item {
-    padding: 1.4rem;
-  }
-
-  .experience-item::before, .education-item::before {
-    left: -1.6rem;
-    width: 12px;
-    height: 12px;
-    top: 1.7rem;
-  }
-
-  .org-icon {
-    width: 26px;
-    height: 26px;
-    margin-right: 10px;
-  }
+  .experiences-title { margin: 2.5rem 0 1.15rem; }
+  .experience-item, .education-item { padding: 1.25rem; }
+  .timeline { padding-left: 1.4rem; }
+  .experience-item::before, .education-item::before { left: -1.4rem; top: 1.5rem; }
+  .org-icon { width: 22px; height: 22px; margin-right: 8px; }
 }

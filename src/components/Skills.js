@@ -1,5 +1,6 @@
 import React from 'react';
 import './Skills.css';
+import Reveal from './Reveal';
 import { MessageSquareCode, Brain, Code, GitBranch, Server, Network, Shield, Bot, AudioLines, ClipboardCheck } from 'lucide-react';
 
 const skills = [
@@ -102,11 +103,10 @@ const skills = [
 
 const Skills = () => {
   return (
-    <div className="skills-container">
-      <h1 className="skills-title">Skills</h1>
-
+    <div className="skills-rail">
+      <div className="skills-container">
       {skills.map(({ icon: Icon, title, affiliation, stack }, index) => (
-        <div className="skill-item" key={index}>
+        <Reveal className="skill-item" key={index} delay={index * 40}>
           <span className="skill-icon-tile">
             <Icon size={22} strokeWidth={1.75} />
           </span>
@@ -118,8 +118,9 @@ const Skills = () => {
               <li className="tech-tag" key={i}>{tool}</li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       ))}
+      </div>
     </div>
   );
 };

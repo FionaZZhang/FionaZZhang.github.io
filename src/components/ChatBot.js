@@ -264,12 +264,6 @@ const ChatBot = () => {
 
   return (
     <div className="chatbot-section">
-      <div className="chatbot-header">
-        <div className="chatbot-title-section">
-          <img src="/favicon.png" alt="AI Assistant" className="chatbot-favicon" />
-          <h2 className="chatbot-title">Ask Anything About Fiona</h2>
-        </div>
-      </div>
 
       <div className="chatbot-container">
         {/* Input section */}
