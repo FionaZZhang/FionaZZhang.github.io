@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { Hand, Hammer, Telescope, Plane, ArrowRight } from 'lucide-react';
 
 /**
- * The bio, split across the phrases of one sentence. Each phrase is a control:
- * hovering previews its paragraphs, clicking pins them. Read in order, the four
- * panels are still the same continuous bio.
- *
- * `sep` is the punctuation that follows the phrase in the sentence.
+ * The bio, split into four parts. Each part is an icon control: hovering
+ * previews its paragraphs, clicking pins them. Read in order, the four panels
+ * are still the same continuous bio.
  */
 const PARTS = [
   {
     key: 'me',
-    label: 'I',
-    sep: ' ',
+    label: 'Me',
     icon: Hand,
     body: [
       <>
@@ -25,7 +22,6 @@ const PARTS = [
   {
     key: 'build',
     label: 'Build Stuff',
-    sep: ', ',
     icon: Hammer,
     body: [
       <>
@@ -40,7 +36,6 @@ const PARTS = [
   {
     key: 'curious',
     label: 'Stay Curious',
-    sep: ', and ',
     icon: Telescope,
     body: [
       <>
@@ -62,7 +57,6 @@ const PARTS = [
   {
     key: 'explore',
     label: 'Keep Exploring',
-    sep: '',
     icon: Plane,
     body: [
       <>
@@ -88,24 +82,27 @@ const BioTabs = () => {
 
   return (
     <div className="biotabs">
-      <h3 className="biotabs-lede">
-        {PARTS.map((part, i) => (
-          <React.Fragment key={part.key}>
+      <div className="biotabs-tabs">
+        {PARTS.map((part, i) => {
+          const TabIcon = part.icon;
+          return (
             <button
+              key={part.key}
               type="button"
-              className={`biotabs-word${activeIndex === i ? ' is-active' : ''}`}
+              className={`biotabs-tab${activeIndex === i ? ' is-active' : ''}`}
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
               onFocus={() => setHovered(i)}
               onBlur={() => setHovered(null)}
               onClick={() => { setPinned(i); setHovered(null); }}
               aria-pressed={pinned === i}
+              aria-label={part.label}
+              title={part.label}
             >
-              {part.label}
+              <TabIcon size={20} strokeWidth={1.75} />
             </button>
-            {part.sep}
-          </React.Fragment>
-        ))}
+          );
+        })}
         <button
           type="button"
           className="biotabs-next"
@@ -115,7 +112,7 @@ const BioTabs = () => {
         >
           <ArrowRight size={20} strokeWidth={2} />
         </button>
-      </h3>
+      </div>
 
       <div className="biotabs-panel" key={active.key}>
         <span className="biotabs-icon" aria-hidden="true">
