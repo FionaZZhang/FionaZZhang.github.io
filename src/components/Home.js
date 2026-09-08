@@ -78,6 +78,30 @@ const Home = () => (
                 </svg>
                 Melbourne, Australia
               </span>
+              <span>
+                <span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8" />
+                    <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1" />
+                    <path d="M2 21h20" />
+                    <path d="M7 8v3" />
+                    <path d="M12 8v3" />
+                    <path d="M17 8v3" />
+                    <path d="M7 4h.01" />
+                    <path d="M12 4h.01" />
+                    <path d="M17 4h.01" />
+                  </svg>
+                  2002
+                </span>
+                <span>
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Scorpio">
+                    <path d="M2.6 19.4v-6.9a2.4 2.4 0 0 1 4.8 0v6.9" />
+                    <path d="M7.4 12.5a2.4 2.4 0 0 1 4.8 0v4c0 2.2 2.1 3.7 5.55 1.55" />
+                    <path d="M21 14.8 19.16 19.46 16.34 16.64Z" fill="currentColor" />
+                  </svg>
+                  ENFP
+                </span>
+              </span>
             </div>
           </Reveal>
 
