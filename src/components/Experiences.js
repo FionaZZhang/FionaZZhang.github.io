@@ -8,12 +8,30 @@ import csiroIcon from '../assets/images/csiroIcon.svg.png';
 import unimelbIcon from '../assets/images/unimelbIcon.png';
 import cmuIcon from '../assets/images/cmu-logo.png'
 import sitemateIcon from '../assets/images/sitemateIcon.png'
+import xeroIcon from '../assets/images/xeroIcon.png'
 
 const Experiences = () => {
   return (
     <div className="experiences-container">
 
       <div className="timeline">
+      <div className="experience-item">
+        <h3>
+          <img src={xeroIcon} alt="Xero icon" className="org-icon" />
+          Engineer - Machine Learning
+        </h3>
+        <p className="date">Sep 2026 - Present</p>
+        <p className="company">
+          <a href="https://www.xero.com/" target="_blank" rel="noopener noreferrer">
+            Xero
+          </a>
+        </p>
+        <p className="location">Melbourne, Australia</p>
+        <ul>
+          <li>Building the infrastructure and services behind Xero's AI products, taking models from research into production for millions of small businesses.</li>
+          <li>Just started.</li>
+        </ul>
+      </div>
       <div className="experience-item">
         <h3>
           <img src={sitemateIcon} alt="Sitemate icon" className="org-icon" />
